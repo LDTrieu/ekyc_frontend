@@ -1,5 +1,5 @@
 import React from 'react';
-
+import moment from 'moment';
 import useFetchAllStudent from './hooks/useFetchAllStudent';
 
 const StudentList = (props) => {
@@ -235,35 +235,41 @@ const StudentList = (props) => {
             <table className="min-w-full bg-white dark:bg-gray-800">
               <thead>
                 <tr className="w-full h-16 border-gray-300 dark:border-gray-200 border-b py-8">
-                  <th className="pl-8 text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+                  {/* <th className="pl-8 text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                     <input
                       type="checkbox"
                       className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-gray-200 bg-white dark:bg-gray-800 outline-none"
                       onclick="checkAll(this)"
                     />
+                  </th> */}
+    
+                  <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+                    
                   </th>
-
+            
+                  <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+                    Họ và tên
+                  </th>
+                  
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                     Mã Nhân Viên
                   </th>
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                    Họ
-                  </th>
-                  <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                    Tên
+                  SĐT
                   </th>
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                     Ngày sinh
                   </th>
-                  <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                    Đại chỉ
-                  </th>
+
                   <td className="text-gray-600 dark:text-gray-400 font-normal pr-8 text-left text-sm tracking-normal leading-4">
                     Mã đơn vị
                   </td>
-                  <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+                  {/* <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                     <div className="opacity-0 w-2 h-2 rounded-full bg-indigo-400" />
-                  </th>
+                  </th> */}
+                       <td className="text-gray-600 dark:text-gray-400 font-normal pr-8 text-left text-sm tracking-normal leading-4">
+                    Trạng thái
+                  </td>
                   <td className="text-gray-600 dark:text-gray-400 font-normal pr-8 text-left text-sm tracking-normal leading-4">
                     Chi Tiết
                   </td>
@@ -273,13 +279,13 @@ const StudentList = (props) => {
               <tbody>
                 {student_list.map((item) => (
                   <tr className="h-24 border-gray-300 dark:border-gray-200 border-b">
-                    <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
+                    {/* <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                       <input
                         type="checkbox"
                         className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-gray-200 bg-white dark:bg-gray-800 outline-none"
                         onclick="tableInteract(this)"
                       />
-                    </td>
+                    </td> */}
                     {/* <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                     <div className="relative w-10 text-gray-600 dark:text-gray-400">
                       <div className="absolute top-0 right-0 w-5 h-5 mr-2 -mt-1 rounded-full bg-indigo-700 text-white flex justify-center items-center text-xs">
@@ -304,16 +310,14 @@ const StudentList = (props) => {
                     </div>
                   </td> */}
                     <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                      {item.studentCode}
-                    </td>
-                    <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                      {item.fullName}
+                      {item.something}
                     </td>
                     <td className="pr-6 whitespace-no-wrap">
                       <div className="flex items-center">
                         <div className="h-8 w-8">
                           <img
-                            src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
+                           // src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
+                                         src= {item.image}
                             alt="true"
                             className="h-full w-full rounded-full overflow-hidden shadow"
                           />
@@ -324,13 +328,18 @@ const StudentList = (props) => {
                       </div>
                     </td>
                     <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                      {item.dateOfBirth}
+                      {item.studentId}
+                    </td>
+
+                    <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
+                      {item.phoneNumber}
                     </td>
                     <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                      {item.fullName}
+                        
+                      {moment(Date(item.birthday)).format('DD/MM/YYYY')}
                     </td>
                     <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                      {item.fullName}
+                      {item.unitId}
                     </td>
                     <td className="pr-6">
                       <div className="w-2 h-2 rounded-full bg-indigo-400" />
