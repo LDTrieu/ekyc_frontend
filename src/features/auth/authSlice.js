@@ -167,7 +167,7 @@ const authSlice = createSlice({
       signUp.pending,
       signIn.pending,
       logOut.pending,
-      getUserInfo.pending,
+      // getUserInfo.pending,
       updateUserInfo.pending,
       changePassword.pending,
       changeAvatar.pending,
@@ -181,7 +181,7 @@ const authSlice = createSlice({
     const rejectedList = [
       signUp.rejected,
       signIn.rejected,
-      getUserInfo.rejected,
+      // getUserInfo.rejected,
       updateUserInfo.rejected,
       changePassword.rejected,
       changeAvatar.rejected,

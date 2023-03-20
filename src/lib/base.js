@@ -9,6 +9,7 @@ const base = axios.create({
 export const basePrivate = axios.create({
   baseURL,
   withCredentials: true,
+
 });
 
 // export const mockServer = axios.create({

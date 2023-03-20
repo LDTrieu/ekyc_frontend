@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import useAxiosWithToken from '../../../../hooks/useAxiosWithToken';
 import { getAllStudentsService } from '../../services/student';
 
-// getAllStudentService
 const useFetchAllStudent = () => {
     console.log("CALL FETCH Students")
     const [students, setStudents] = useState([])
@@ -38,5 +37,6 @@ const useFetchAllStudent = () => {
     return filterStudent
 
 }
+
 
 export default useFetchAllStudent;

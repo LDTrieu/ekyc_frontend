@@ -4,7 +4,7 @@ import { basePrivate } from '../lib/base';
 
 const useAxiosWithToken = () => {
   const { accessToken } = useSelector((store) => store.auth);
-  console.log("accessToken: ", accessToken)
+  // console.log("accessToken: ", accessToken)
 
   useEffect(() => {
     const request = basePrivate.interceptors.request.use(

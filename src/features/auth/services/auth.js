@@ -1,4 +1,4 @@
-import base from '../../../lib/base';
+import { base } from 'lib';
 import { v4 as uuidv4 } from 'uuid';
 
 export const signUpService = (email, firstname, lastname, password, passwordConfirmation) => {

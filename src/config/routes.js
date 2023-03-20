@@ -16,6 +16,9 @@ const routes = {
 
     // Student
     student: '/student',
+    studentCreate: '/student/create',
+    studentCreate2: '/student/create2',
+
     // Staff
 
     // Report
