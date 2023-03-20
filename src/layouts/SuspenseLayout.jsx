@@ -14,9 +14,9 @@ const SuspenseLayout = ({ children }) => {
   const location = useLocation();
   const axios = useAxiosWithToken();
 
-  useEffect(() => {
-     isLogin && dispatch(getUserInfo(axios));
-  }, [dispatch, axios, isLogin]);
+  // useEffect(() => {
+  //    isLogin && dispatch(getUserInfo(axios));
+  // }, [dispatch, axios, isLogin]);
 
   useEffect(() => {
     if (!location.hash) {

@@ -8,7 +8,7 @@ import { AuthLayout, NoRecommendLayout } from '../layouts';
 import Home from '../pages/Home';
 import Signin from '../pages/Signin';
 import UserProfile from '../pages/UserProfile';
-import { StudentList } from '../features/student'
+import { StudentList, StudentCreate2, StudentCreate } from '../features/student'
 
 const publicRouters = [
     // Auth
@@ -24,6 +24,14 @@ const publicRouters = [
     // Student
     {
         path: config.routes.student, component: StudentList,
+        layout: NoRecommendLayout,
+    },
+    {
+        path: config.routes.studentCreate, component: StudentCreate,
+        layout: NoRecommendLayout,
+    },
+    {
+        path: config.routes.studentCreate2, component: StudentCreate2,
         layout: NoRecommendLayout,
     },
 
