@@ -3,41 +3,107 @@ import moment from "moment";
 import useFetchAllStudent from "./hooks/useFetchAllStudent";
 import useBlockStudent from "./hooks/useBlockStudent";
 import useAxiosWithToken from "hooks/useAxiosWithToken";
-import { updateStudentService } from "../services/student";
+import {
+  updateStudentService,
+  getListStudentService,
+  getDetailStudentService,
+} from "../services/student";
 import { toast } from "react-toastify";
-import { ModalConfirm } from "components/ui/Modal";
-import { useNavigate } from 'react-router-dom';
-
+import { ModalConfirm, ModalStudentDetail } from "components/ui/Modal";
+import { useNavigate } from "react-router-dom";
+const student1 = { firstName: 'John', lastName: 'Doe' };
 const StudentList = (props) => {
   const { student_list } = useFetchAllStudent();
   const axiosPrivate = useAxiosWithToken();
   const [selectedStudent, setSelectedStudent] = useState(null);
+
+  const [modalDeleteCloseVisible, setModalDeleteCloseVisible] = useState(false);
+  const showDeleteModal = () => setModalDeleteCloseVisible(true);
+  const hideDeleteModal = () => setModalDeleteCloseVisible(false);
+
+  const [modalDetailCloseVisible, setModalDetailCloseVisible] = useState(false);
+  const showDetailModal = () => setModalDetailCloseVisible(true);
+  const hideDetailModal = () => setModalDetailCloseVisible(false);
+
   const [modalCloseVisible, setModalCloseVisible] = useState(false);
   const showModal = () => setModalCloseVisible(true);
   const hideModal = () => setModalCloseVisible(false);
+
   const navigate = useNavigate();
-  // function showModal() {
-  //   console.log("Button clicked!");
-  // }
-  const handleCloseExam = () => {
-    navigate(-1, { replace: true });
-  };
 
   const onSelectStudent = (student) => {
     console.log("item: ", student);
     setSelectedStudent(student);
   };
 
+  const showDetailStudent=(studentId)=>{
+    try {
+      // const response =
+      getDetailStudentService(
+        axiosPrivate,
+        studentId
+      ).then((response) => {
+        // console.log("response", response);
+        switch (response.data.code) {
+          case 0:
+            // window.location.reload();
+            //toast.success("Cập nhật thành công!");
+            //console.log("response.data", response.data.payload);
+          const student =response.data.payload
+            //const student = response.data.payload
+            console.log("student: ",student)
+            setSelectedStudent(student)
+            showDetailModal();
+            console.log("selectedStudent",student)
+            break;
+          case 53:
+            toast.error("Service lỗi! " + response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            break;
+          default:
+
+            if (response.data.message.length !== 0) {
+              toast.error(response.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            } else {
+              toast.error("Lỗi gì đó đã xảy ra tại service!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+        }
+      });
+      // console.log("response: ", response.then())
+    } catch (error) {
+      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockStudent ~ error", error);
+    }
+    
+  }
   const BlockStudent = () => {
     console.log("selectedStudent: ", selectedStudent);
-
-    // const { accessToken } = useSelector((store) => store.auth);
-
-    console.log("CALL useEffect");
-
     selectedStudent.isBlocked = !selectedStudent.isBlocked;
-
-    console.log("CALL isBlocked:", selectedStudent.isBlocked);
     try {
       // const response =
       updateStudentService(
@@ -48,9 +114,8 @@ const StudentList = (props) => {
         console.log("response", response);
         switch (response.data.code) {
           case 0:
-            window.location.reload();
+            // window.location.reload();
             toast.success("Cập nhật thành công!");
-
             break;
           case 53:
             toast.error("Service lỗi! " + response.data.message, {
@@ -97,6 +162,57 @@ const StudentList = (props) => {
     }
   };
 
+  const DownloadList = () => {
+    try {
+      getListStudentService(axiosPrivate).then((response) => {
+        console.log("response", response);
+        switch (response.data.code) {
+          case 0:
+            // window.location.reload();
+            //toast.success("Cập nhật thành công!");
+            break;
+          case 53:
+            toast.error("Service lỗi! " + response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            break;
+          default:
+            if (response.data.message.length !== 0) {
+              toast.error(response.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            } else {
+              toast.error("Lỗi gì đó đã xảy ra tại service!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+        }
+      });
+    } catch (error) {
+      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockStudent ~ error", error);
+    }
+  };
   return (
     <>
       <div className="py-20">
@@ -170,6 +286,11 @@ const StudentList = (props) => {
                 <a
                   className="text-gray-600 dark:text-gray-400 mr-2 p-2 border-transparent border bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
                   href="javascript: void(0)"
+                  // detail test
+                  onClick={(item) => {
+                    setSelectedStudent(item)
+                    showDetailModal();
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +313,10 @@ const StudentList = (props) => {
                   className="text-red-500 p-2 border-transparent border bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
                   href="javascript: void(0)"
                   // Delete
-                  onClick={BlockStudent}
+                  onClick={() => {
+                    showDeleteModal();
+                  }}
+                  // onClick={BlockStudent}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -294,9 +418,12 @@ const StudentList = (props) => {
                 </div>
               </div>
               <div className="lg:ml-6 flex items-center">
-
-
-                <button className="bg-gray-200 transition duration-150 ease-in-out focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray hover:bg-gray-300 rounded text-indigo-700 px-5 h-8 flex items-center text-sm">
+                <button
+                  className="bg-gray-200 transition duration-150 ease-in-out focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray hover:bg-gray-300 rounded text-indigo-700 px-5 h-8 flex items-center text-sm"
+                  onClick={() => {
+                    showModal();
+                  }}
+                >
                   Download List
                 </button>
 
@@ -459,7 +586,12 @@ const StudentList = (props) => {
                           </li>
                         </ul>
                       </div>
-                      <button className="text-gray-500 rounded cursor-pointer border border-transparent focus:outline-none">
+                      <button className="text-gray-500 rounded cursor-pointer border border-transparent focus:outline-none"
+                     //onClick={detailStudent}
+                      onClick={() => {
+                        showDetailStudent(item.studentId);
+                      }}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-id"
@@ -488,16 +620,36 @@ const StudentList = (props) => {
           </div>
         </div>
       </div>
-      
+
       <ModalConfirm
         header="Xác nhận"
-        message="Bạn có chắc chắn muốn thoát? Kết quả sẽ không được lưu lại đâu nha!"
-        isShowing={modalCloseVisible}
-        onHide={hideModal}
-        onResolve={handleCloseExam}
+        message="Bạn có chắc chắn muốn khóa tài khoản này?"
+        isShowing={modalDeleteCloseVisible}
+        onHide={hideDeleteModal}
+        onResolve={BlockStudent}
         titleResolve="Xác nhận"
         titleReject="Hủy"
-      /> 
+      />
+      <ModalConfirm
+        header="Xác nhận"
+        message="Bạn muốn tải danh sách này?"
+        isShowing={modalCloseVisible}
+        onHide={hideModal}
+        onResolve={DownloadList}
+        titleResolve="Xác nhận"
+        titleReject="Hủy"
+      />
+      <ModalStudentDetail
+        header="Detail"
+        //message="Bạn muốn tải danh sách này?"
+         isShowing={modalDetailCloseVisible}
+        //isShowing={false}
+        onHide={hideDetailModal}
+        onResolve={DownloadList}
+        titleResolve="OK"
+        titleReject="Hủy"
+        student={selectedStudent}
+      />
     </>
   );
 };

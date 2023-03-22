@@ -75,3 +75,24 @@ export const updateStudentService = (axiosPrivate, studentId, isBlocked) => {
         withCredentials: false,
     },);
 }
+
+export const getListStudentService = (axiosPrivate) => {
+    console.log("Get list")
+    // return axiosPrivate.get('/portal/student/list-pdf/123', {
+    // }, {
+    //     withCredentials: false,
+    // },);
+    return axiosPrivate.get('/portal/student/list-pdf/123', {
+    }, {
+        withCredentials: false,
+    },);
+}
+
+export const getDetailStudentService = (axiosPrivate, studentId) => {
+    console.log("service get detail student")
+    return axiosPrivate.get('/portal/student/detail/123', {
+        params: {
+            studentId: studentId,
+        }
+    }) // student
+}
