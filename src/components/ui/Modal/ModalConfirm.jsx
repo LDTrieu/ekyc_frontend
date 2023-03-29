@@ -1,5 +1,5 @@
 import Modal from './Modal';
-import { Button } from '../../../components/ui';
+import { Button } from 'components/ui';
 
 /*
   type = 'confirm' || 'notify'

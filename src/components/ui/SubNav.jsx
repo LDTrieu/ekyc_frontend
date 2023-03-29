@@ -3,9 +3,9 @@
 import { useRef, useState } from 'react';
 import { BiMenu } from 'react-icons/bi';
 import { memo } from 'react';
-import Container from '../../layouts/components/Container';
+import Container from 'layouts/components/Container';
 import { Link } from 'react-router-dom';
-import useClickOutside from '../../hooks/useClickOutside';
+import useClickOutside from 'hooks/useClickOutside';
 import classNames from 'classnames';
 import { useEffect } from 'react';
 

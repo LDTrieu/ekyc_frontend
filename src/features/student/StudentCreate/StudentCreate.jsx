@@ -1,4 +1,4 @@
-import { MuiSteps } from "../../../components/ui";
+import { MuiSteps } from "components/ui";
 import StudentProfile from "../StudentCreate/components/StudentProfile";
 import StudentEkyc from "../StudentCreate/components/StudentEkyc";
 import ConfirmProfile from "../StudentCreate/components/ConfirmProfile";

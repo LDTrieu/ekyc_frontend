@@ -1,4 +1,4 @@
-import { Filter } from '../../components/ui';
+import { Filter } from 'components/ui';
 import useGrid from 'features/course/CourseList/hooks/useGrid';
 import Container from 'layouts/components/Container';
 import React, { useState } from 'react';

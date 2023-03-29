@@ -5,11 +5,13 @@ import config from '../config';
 import { AuthLayout, NoRecommendLayout } from '../layouts';
 
 // Page
-import Home from '../pages/Home';
-import Signin from '../pages/Signin';
-import UserProfile from '../pages/UserProfile';
-import { StudentList, StudentCreate2, StudentCreate } from '../features/student'
-
+import Home from 'pages/Home';
+import Signin from 'pages/Signin';
+import UserProfile from 'pages/UserProfile';
+import { StudentList, StudentCreate2, StudentCreate } from 'features/student'
+import { SessionList } from 'features/authSession';
+import { DeviceList } from 'features/device';
+import { AccountList, AccountCreate } from 'features/account';
 const publicRouters = [
     // Auth
     { path: config.routes.home, component: Home },
@@ -35,11 +37,27 @@ const publicRouters = [
         layout: NoRecommendLayout,
     },
 
-    // Staff
-    { path: config.routes.staff, component: Home },
+    // Account
+    {
+        path: config.routes.account, component: AccountList,
+        layout: NoRecommendLayout,
+    },
+    {
+        path: config.routes.accountCreate, component: AccountCreate,
+        layout: NoRecommendLayout,
+    },
 
     // Device
-    { path: config.routes.device, component: Home },
+    {
+        path: config.routes.device, component: DeviceList,
+        layout: NoRecommendLayout,
+    },
+
+    // Session
+    {
+        path: config.routes.session, component: SessionList,
+        layout: NoRecommendLayout,
+    },
 
     // Report
     { path: config.routes.report, component: Home },

@@ -1,46 +1,39 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createStore } from "redux";
 import {
-    createStudentProfileService,
-    updateStudentEkycService,
-} from "./services/student";
+    createAccountProfileService,
+    updateAccountEkycService,
+} from "./services/account";
 
 const initialState = {
-    studentAdded: [],
+    accountAdded: [],
     // failAttempt: false,
     // isLoading: false,
     // error: '',
 };
-
-export const createStudentProfile = createAsyncThunk(
-    "student/createStudentProfile",
+export const createAccountProfile = createAsyncThunk(
+    "account/createAccountProfile",
     async (
         {
             axiosPrivate,
-            studentId,
+            fullName,
             email,
-            firstName,
-            lastName,
+            password,
+            unitId,
             phoneNumber,
             dateOfBirth,
-            unitId,
-            address,
-            image,
         },
         thunkAPI
     ) => {
         try {
-            const response = await createStudentProfileService(
+            const response = await createAccountProfileService(
                 axiosPrivate,
-                studentId,
+                fullName,
                 email,
-                firstName,
-                lastName,
+                password,
+                unitId,
                 phoneNumber,
                 dateOfBirth,
-                unitId,
-                address,
-                image
             );
             console.log("response", response);
             return response.data;
@@ -50,12 +43,12 @@ export const createStudentProfile = createAsyncThunk(
     }
 );
 
-export const updateStudentEkyc = createAsyncThunk(
-    "student/updateStudentEkyc",
+export const updateAccountEkyc = createAsyncThunk(
+    "account/updateAccountEkyc",
     async (
         {
             axiosPrivate,
-            studentId,
+            accountId,
             personId,
             fullName,
             nationalId,
@@ -71,9 +64,9 @@ export const updateStudentEkyc = createAsyncThunk(
         thunkAPI
     ) => {
         try {
-            const response = await updateStudentEkycService(
+            const response = await updateAccountEkycService(
                 axiosPrivate,
-                studentId,
+                accountId,
                 personId,
                 fullName,
                 nationalId,
@@ -94,9 +87,9 @@ export const updateStudentEkyc = createAsyncThunk(
     }
 );
 
-const studentSlice = createSlice({
-    name: "student",
+const accountSlice = createSlice({
+    name: "account",
     initialState,
 });
 
-export default studentSlice.reducer;
+export default accountSlice.reducer;
