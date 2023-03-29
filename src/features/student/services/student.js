@@ -13,7 +13,8 @@ export const createStudentProfileService = (
     dateOfBirth,
     unitId,
     address,
-    image) => {
+    image
+) => {
     return axiosPrivate.post('/portal/student/create/1', {
         studentId,
         email,

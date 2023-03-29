@@ -1,11 +1,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import useAxiosWithToken from '../../../../hooks/useAxiosWithToken';
-import { getAllStudentsService } from '../../services/student';
+import useAxiosWithToken from 'hooks/useAxiosWithToken';
+import { getAllStudentsService } from 'features/student/services/student';
 
 const useFetchAllStudent = () => {
-    console.log("CALL FETCH Students")
+    console.log("call fetch students")
     const [students, setStudents] = useState([])
     const { accessToken } = useSelector((store) => store.auth);
     const axiosWithToken = useAxiosWithToken();
@@ -20,7 +20,6 @@ const useFetchAllStudent = () => {
 
     useEffect(() => {
         const fetchStudents = async () => {
-
             try {
                 const response = await getAllStudentsService(axiosWithToken);
                 console.log("response: ", response)

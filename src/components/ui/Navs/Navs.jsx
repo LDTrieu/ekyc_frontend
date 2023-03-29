@@ -1,5 +1,5 @@
 import { useRef, useState, memo } from 'react';
-import useClickOutside from '../../../hooks/useClickOutside';
+import useClickOutside from 'hooks/useClickOutside';
 import useCurrentPage from './useCurrentPage';
 import { Link } from 'react-router-dom';
 import { BiMenu } from 'react-icons/bi';

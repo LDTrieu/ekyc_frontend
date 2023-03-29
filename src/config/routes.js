@@ -10,20 +10,28 @@ const routes = {
     // User
     me: '/me',
     myCourses: '/me',
-    myExams: '/me/exams',
-    myFlashcards: '/me/flashcards',
-    myContests: '/me/contests',
+    // myExams: '/me/exams',
+    // myFlashcards: '/me/flashcards',
+    // myContests: '/me/contests',
 
     // Student
     student: '/student',
     studentCreate: '/student/create',
     studentCreate2: '/student/create2',
 
-    // Staff
+    // Account
+    account: '/account',
+    accountCreate: '/account/create',
+
+    // Session
+    session: '/session',
+
+    // Device
+    device: '/device',
 
     // Report
 
-    //
+
 
 
 

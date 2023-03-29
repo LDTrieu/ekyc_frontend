@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input } from "../../../../components/ui";
-import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
+import { Input } from "components/ui";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 import { toast } from "react-toastify";
-import { studentEkycScheme } from "../../../../validations/studentEkyc";
+import { studentEkycScheme } from "validations/studentEkyc";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from 'uuid';
 import {  updateStudentEkyc } from "../../../../features/student/studentSlice";

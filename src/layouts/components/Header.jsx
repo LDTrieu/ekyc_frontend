@@ -16,9 +16,10 @@ import { printPrice } from '../../utils/formatCurrency';
 
 const NAVIGATION_LIST = [
   ['Sinh viên', '/student'],
-  ['Tài khoản', '/exam'],
+  ['Tài khoản', '/account'],
   ['Thiết bị', '/device'],
-  ['Kiểm duyệt tài khoản', '/censorship'],
+  // ['Kiểm duyệt tài khoản', '/censorship'],
+  ['Realtime-IO', '/session'],
   ['Xuất báo cáo', '/report'],
 ];
 
