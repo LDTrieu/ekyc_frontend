@@ -130,6 +130,7 @@ const authSlice = createSlice({
       state.isLogin = true;
       state.isLoading = false;
       state.user = action.payload.payload;
+      state.role=action.payload.payload.role
       state.accessToken = state.user.token;
       state.error = '';
     });

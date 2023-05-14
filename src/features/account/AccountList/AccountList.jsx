@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import moment from "moment";
 import useFetchAllAccount from "./hooks/useFetchAllAccount";
-import useBlockAccount from "./hooks/useBlockAccount";
 import useAxiosWithToken from "hooks/useAxiosWithToken";
 import {
-  createAccountProfileService,
+
   updateAccountService,
   getListAccountService,
   getDetailAccountService,
 } from "../services/account";
 import { toast } from "react-toastify";
+
 import {
   ModalConfirm, 
   ModalAccountDetail, 
   ModalAccountCreate
 } from "components/ui/Modal";
-import { useNavigate } from "react-router-dom";
-const Account1 = { firstName: 'John', lastName: 'Doe' };
+
 const AccountList = (props) => {
-  const { account_list ,refetch } = useFetchAllAccount();
+  const { account_list  } = useFetchAllAccount();
+
   const axiosPrivate = useAxiosWithToken();
   const [selectedAccount, setSelectedAccount] = useState(null);
 
@@ -38,78 +37,13 @@ const AccountList = (props) => {
   const showModal = () => setModalCloseVisible(true);
   const hideModal = () => setModalCloseVisible(false);
 
-  const navigate = useNavigate();
-
   const onSelectAccount = (Account) => {
     console.log("item: ", Account);
     setSelectedAccount(Account);
   };
 
-  // const CreateAccount=(AccountId)=>{
-  //   try {
-  //     // const response =
-  //     createAccountProfileService(
-  //       axiosPrivate,
-  //     ).then((response) => {
-  //       // console.log("response", response);
-  //       switch (response.data.code) {
-  //         case 0:
-  //           // window.location.reload();
-  //           //toast.success("Cập nhật thành công!");
-  //           //console.log("response.data", response.data.payload);
-  //         const Account =response.data.payload
-  //           //const Account = response.data.payload
-  //           console.log("Account: ",Account)
-  //           setSelectedAccount(Account)
-  //           showDetailModal();
-  //           console.log("selectedAccount",Account)
-  //           break;
-  //         case 53:
-  //           toast.error("Service lỗi! " + response.data.message, {
-  //             position: "top-right",
-  //             autoClose: 5000,
-  //             hideProgressBar: false,
-  //             closeOnClick: true,
-  //             pauseOnHover: true,
-  //             draggable: true,
-  //             progress: undefined,
-  //             theme: "light",
-  //           });
-  //           break;
-  //         default:
-
-  //           if (response.data.message.length !== 0) {
-  //             toast.error(response.message, {
-  //               position: "top-right",
-  //               autoClose: 5000,
-  //               hideProgressBar: false,
-  //               closeOnClick: true,
-  //               pauseOnHover: true,
-  //               draggable: true,
-  //               progress: undefined,
-  //               theme: "light",
-  //             });
-  //           } else {
-  //             toast.error("Lỗi gì đó đã xảy ra tại service!", {
-  //               position: "top-right",
-  //               autoClose: 5000,
-  //               hideProgressBar: false,
-  //               closeOnClick: true,
-  //               pauseOnHover: true,
-  //               draggable: true,
-  //               progress: undefined,
-  //               theme: "light",
-  //             });
-  //           }
-  //       }
-  //     });
-  //     // console.log("response: ", response.then())
-  //   } catch (error) {
-  //     console.log("🚀 ~ file: index.jsx:27 ~ pathBlockAccount ~ error", error);
-  //   }
-    
-  // }
   const showDetailAccount=(AccountId)=>{
+
     try {
       // const response =
       getDetailAccountService(
@@ -119,9 +53,6 @@ const AccountList = (props) => {
         // console.log("response", response);
         switch (response.data.code) {
           case 0:
-            // window.location.reload();
-            //toast.success("Cập nhật thành công!");
-            //console.log("response.data", response.data.payload);
           const Account =response.data.payload
             //const Account = response.data.payload
             console.log("Account: ",Account)
@@ -239,10 +170,10 @@ const AccountList = (props) => {
     try {
       getListAccountService(axiosPrivate).then((response) => {
         console.log("response", response);
+        console.log("response.data.payload.url", response.data.payload.url);
         switch (response.data.code) {
           case 0:
-            // window.location.reload();
-            //toast.success("Cập nhật thành công!");
+            window.open(response.data.payload.url)
             break;
           case 53:
             toast.error("Service lỗi! " + response.data.message, {
@@ -288,7 +219,7 @@ const AccountList = (props) => {
   };
   return (
     <>
-      <div className="py-20">
+      <div className="py-5">
         <div className="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
           <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
             <div className="w-full lg:w-1/3 flex flex-col lg:flex-row items-start lg:items-center">
@@ -506,7 +437,6 @@ const AccountList = (props) => {
                     // onClick={modalCloseVisible ? hideModal : showModal}
                     onClick={() => {
                       showCreateModal();
-                   
                     }}
                   >
                     <svg
@@ -535,13 +465,7 @@ const AccountList = (props) => {
             <table className="min-w-full bg-white dark:bg-gray-800">
               <thead>
                 <tr className="w-full h-16 border-gray-300 dark:border-gray-200 border-b py-8">
-                  {/* <th className="pl-8 text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                    <input
-                      type="checkbox"
-                      className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-gray-200 bg-white dark:bg-gray-800 outline-none"
-                      onclick="checkAll(this)"
-                    />
-                  </th> */}
+
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"></th>
 
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"></th>
@@ -563,9 +487,7 @@ const AccountList = (props) => {
                   <td className="text-gray-600 dark:text-gray-400 font-normal pr-8 text-left text-sm tracking-normal leading-4">
                     Tạo bởi
                   </td>
-                  {/* <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                    <div className="opacity-0 w-2 h-2 rounded-full bg-indigo-400" />
-                  </th> */}
+
                   <td className="text-gray-600 dark:text-gray-400 font-normal pr-8 text-left text-sm tracking-normal leading-4">
                     Trạng thái
                   </td>
@@ -576,11 +498,9 @@ const AccountList = (props) => {
               </thead>
 
               <tbody>
+                
                 {account_list.map((item) => (
                   <tr className="h-24 border-gray-300 dark:border-gray-200 border-b">
-                    {/* <p>
-                    {item.accountId}
-                    </p> */}
                     <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                       <input
                         type="radio"
@@ -589,42 +509,13 @@ const AccountList = (props) => {
                         onChange={() => onSelectAccount(item)}
                       />
                     </td>
-                    {/* <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                    <div className="relative w-10 text-gray-600 dark:text-gray-400">
-                      <div className="absolute top-0 right-0 w-5 h-5 mr-2 -mt-1 rounded-full bg-indigo-700 text-white flex justify-center items-center text-xs">
-                        3
-                      </div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-file"
-                        width={28}
-                        height={28}
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                      </svg>
-                    </div>
-                  </td> */}
+
                     <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                       {item.something}
                     </td>
                     <td className="pr-6 whitespace-no-wrap">
                       <div className="flex items-center">
-                        {/* <div className="h-8 w-8">
-                          <img
-                            // src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
-                            src={item.image}
-                            alt="true"
-                            className="h-full w-full rounded-full overflow-hidden shadow"
-                          />
-                        </div> */}
+
                         <p className="ml-2 text-gray-800 dark:text-gray-100 tracking-normal leading-4 text-sm">
                           {item.fullName}
                         </p>
@@ -709,17 +600,16 @@ const AccountList = (props) => {
         titleReject="Hủy"
       />
       <ModalConfirm
-        header="Xác nhận"
+        header="Xác nhận1"
         message="Bạn muốn tải danh sách này?"
         isShowing={modalCloseVisible}
         onHide={hideModal}
         onResolve={DownloadList}
-        titleResolve="Xác nhận"
+        titleResolve="Xác nhận2"
         titleReject="Hủy"
       />
       <ModalAccountDetail
         header="Detail"
-        //message="Bạn muốn tải danh sách này?"
          isShowing={modalDetailCloseVisible}
         //isShowing={false}
         onHide={hideDetailModal}

@@ -16,7 +16,6 @@ const ModalDetail = ({
   zIndex,
   type,
   borderRadius,
-  student,
 }) => {
   return ReactDom.createPortal(
     <div>

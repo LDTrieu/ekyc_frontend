@@ -9,7 +9,10 @@ import {
   getDetailStudentService,
 } from "../services/student";
 import { toast } from "react-toastify";
-import { ModalConfirm, ModalStudentDetail } from "components/ui/Modal";
+import { ModalConfirm, 
+  ModalStudentDetail,
+  ModalStudentCreate 
+} from "components/ui/Modal";
 import { useNavigate } from "react-router-dom";
 const student1 = { firstName: 'John', lastName: 'Doe' };
 const StudentList = (props) => {
@@ -21,6 +24,11 @@ const StudentList = (props) => {
   const showDeleteModal = () => setModalDeleteCloseVisible(true);
   const hideDeleteModal = () => setModalDeleteCloseVisible(false);
 
+  const [modalCreateCloseVisible, setModalCreateCloseVisible] = useState(false);
+  const showCreateModal = () => setModalCreateCloseVisible(true);
+  const hideCreateModal = () => setModalCreateCloseVisible(false);
+
+  
   const [modalDetailCloseVisible, setModalDetailCloseVisible] = useState(false);
   const showDetailModal = () => setModalDetailCloseVisible(true);
   const hideDetailModal = () => setModalDetailCloseVisible(false);
@@ -51,6 +59,7 @@ const StudentList = (props) => {
             //console.log("response.data", response.data.payload);
           const student =response.data.payload
             //const student = response.data.payload
+            console.log("response.data.payload: ",response.data.payload)
             console.log("student: ",student)
             setSelectedStudent(student)
             showDetailModal();
@@ -215,7 +224,7 @@ const StudentList = (props) => {
   };
   return (
     <>
-      <div className="py-20">
+      <div className="py-5">
         <div className="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
           <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
             <div className="w-full lg:w-1/3 flex flex-col lg:flex-row items-start lg:items-center">
@@ -427,10 +436,18 @@ const StudentList = (props) => {
                   Download List
                 </button>
 
-                <a href="http://localhost:3000/student/create">
+                {/* <a href="http://localhost:3000/student/create">
                   <button
                     className="text-white ml-4 cursor-pointer focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 w-8 h-8 rounded flex items-center justify-center"
                     // onClick={modalCloseVisible ? hideModal : showModal}
+                  > */}
+                  <a>
+                  <button
+                    className="text-white ml-4 cursor-pointer focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 w-8 h-8 rounded flex items-center justify-center"
+                    // onClick={modalCloseVisible ? hideModal : showModal}
+                    onClick={() => {
+                      showCreateModal();
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -457,13 +474,7 @@ const StudentList = (props) => {
             <table className="min-w-full bg-white dark:bg-gray-800">
               <thead>
                 <tr className="w-full h-16 border-gray-300 dark:border-gray-200 border-b py-8">
-                  {/* <th className="pl-8 text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                    <input
-                      type="checkbox"
-                      className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-gray-200 bg-white dark:bg-gray-800 outline-none"
-                      onclick="checkAll(this)"
-                    />
-                  </th> */}
+
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"></th>
 
                   <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"></th>
@@ -485,9 +496,7 @@ const StudentList = (props) => {
                   <td className="text-gray-600 dark:text-gray-400 font-normal pr-8 text-left text-sm tracking-normal leading-4">
                     Mã đơn vị
                   </td>
-                  {/* <th className="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                    <div className="opacity-0 w-2 h-2 rounded-full bg-indigo-400" />
-                  </th> */}
+
                   <td className="text-gray-600 dark:text-gray-400 font-normal pr-8 text-left text-sm tracking-normal leading-4">
                     Trạng thái
                   </td>
@@ -500,9 +509,6 @@ const StudentList = (props) => {
               <tbody>
                 {student_list.map((item) => (
                   <tr className="h-24 border-gray-300 dark:border-gray-200 border-b">
-                    {/* <p>
-                    {item.studentId}
-                    </p> */}
                     <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                       <input
                         type="radio"
@@ -511,29 +517,6 @@ const StudentList = (props) => {
                         onChange={() => onSelectStudent(item)}
                       />
                     </td>
-                    {/* <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                    <div className="relative w-10 text-gray-600 dark:text-gray-400">
-                      <div className="absolute top-0 right-0 w-5 h-5 mr-2 -mt-1 rounded-full bg-indigo-700 text-white flex justify-center items-center text-xs">
-                        3
-                      </div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-file"
-                        width={28}
-                        height={28}
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                      </svg>
-                    </div>
-                  </td> */}
                     <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                       {item.something}
                     </td>
@@ -639,9 +622,11 @@ const StudentList = (props) => {
         titleResolve="Xác nhận"
         titleReject="Hủy"
       />
-      <ModalStudentDetail
+
+      {
+       selectedStudent  && <ModalStudentDetail
         header="Detail"
-        //message="Bạn muốn tải danh sách này?"
+        message={selectedStudent.fullName}
          isShowing={modalDetailCloseVisible}
         //isShowing={false}
         onHide={hideDetailModal}
@@ -650,7 +635,20 @@ const StudentList = (props) => {
         titleReject="Hủy"
         student={selectedStudent}
       />
+}
+        <ModalStudentCreate
+        header="Detail"
+        // message="Tạo tài khoản quản lý"
+         isShowing={modalCreateCloseVisible}
+        //isShowing={false}
+        onHide={hideCreateModal}
+        // onResolve={CreateAccount}
+        titleResolve="OK"
+        titleReject="Hủy"
+        // account={selectedAccount}
+      />
     </>
+    
   );
 };
 

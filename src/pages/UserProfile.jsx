@@ -120,14 +120,14 @@ function UserProfile() {
             <span className="w-full border-t-[0.5px] border-br_gray" />
             {/* Num of enrolled course */}
             <div className="flex w-full justify-between px-10 py-5">
-              <h1 className="text-h5 font-medium text-t_dark">Số khóa học đã đăng ký</h1>
-              <h1 className="text-h5 font-medium text-ac_orange">{user.joinedCourses}</h1>
+              {/* <h1 className="text-h5 font-medium text-t_dark">Số khóa học đã đăng ký</h1>
+              <h1 className="text-h5 font-medium text-ac_orange">{user.joinedCourses}</h1> */}
             </div>
             {/* Num of your flashcard */}
             <span className="w-full border-t-[0.5px] border-br_gray" />
             <div className="flex w-full justify-between px-10 py-5">
-              <h1 className="text-h5 font-medium text-t_dark">Số flashcard của bạn</h1>
-              <h1 className="text-h5 font-medium text-ac_green">15</h1>
+              {/* <h1 className="text-h5 font-medium text-t_dark">Số flashcard của bạn</h1>
+              <h1 className="text-h5 font-medium text-ac_green">15</h1> */}
             </div>
             {/* Accumulated point */}
             <span className="w-full border-t-[0.5px] border-br_gray" />
@@ -171,18 +171,18 @@ function UserProfile() {
           <div className="flex flex-col items-center w-full my-7 px-5 md:hidden">
             {/* Num of enrolled course */}
             <div className="flex w-full justify-between py-1">
-              <h1 className="text-sm font-medium text-t_dark">Số khóa học đã đăng ký</h1>
-              <h1 className="text-sm font-medium text-ac_orange">{user.joinedCourses}</h1>
+              {/* <h1 className="text-sm font-medium text-t_dark">Số khóa học đã đăng ký</h1>
+              <h1 className="text-sm font-medium text-ac_orange">{user.joinedCourses}</h1> */}
             </div>
             {/* Num of your flashcard */}
             <div className="flex w-full justify-between py-1">
-              <h1 className="text-sm font-medium text-t_dark">Số flashcard của bạn</h1>
-              <h1 className="text-sm font-medium text-ac_green">15</h1>
+              {/* <h1 className="text-sm font-medium text-t_dark">Số flashcard của bạn</h1>
+              <h1 className="text-sm font-medium text-ac_green">15</h1> */}
             </div>
             {/* Accumulated point */}
             <div className="flex w-full justify-between py-1">
-              <h1 className="text-sm font-medium text-t_dark">Điểm tích lũy</h1>
-              <h1 className="text-sm font-bold text-t_light_gray_2">{user.accumulatedPoint}</h1>
+              {/* <h1 className="text-sm font-medium text-t_dark">Điểm tích lũy</h1>
+              <h1 className="text-sm font-bold text-t_light_gray_2">{user.accumulatedPoint}</h1> */}
             </div>
           </div>
         </div>

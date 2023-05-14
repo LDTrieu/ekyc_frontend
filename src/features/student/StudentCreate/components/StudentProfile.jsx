@@ -123,10 +123,6 @@ function StudentProfile({data,onDataChange }) {
         >
           Tạo mới nhân viên
         </h1>
-        {/* <p role="contentinfo" className=" focus:outline-nonetext-sm font-light leading-tight text-gray-600 mt-4">
-                Fill in the data for profile. It will take a couple of minutes. <br />
-                You only need a passport
-        </p> */}
         <h2
           role="heading"
           aria-label="enter Personal data"
@@ -134,9 +130,7 @@ function StudentProfile({data,onDataChange }) {
         >
           Thông tin nhân viên
         </h2>
-        {/* <p className="text-sm font-light leading-none text-gray-600 mt-0.5">
-          Your details and place of birth
-        </p> */}
+
         <div className="mt-8 md:flex items-center">
           <div className="flex flex-col">
             <label className="mb-3 text-sm leading-none text-gray-800">
@@ -276,40 +270,7 @@ function StudentProfile({data,onDataChange }) {
             />
           </div>
         </div>
-        {/* <div className="mt-12">
-          <div className="py-4 flex items-center">
-            <div className="bg-white dark:bg-gray-800 border rounded-sm border-gray-400 dark:border-gray-700 w-4 h-4 flex flex-shrink-0 justify-center items-center relative">
-              <input
-                type="checkbox"
-                tabIndex={0}
-                aria-label="I agree with the terms of service"
-                defaultChecked
-                className="checkbox opacity-0 absolute cursor-pointer w-full h-full"
-              />
-              <div className="check-icon hidden bg-blue-500 text-white rounded-sm">
-                <svg
-                  className="icon icon-tabler icon-tabler-check"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <path d="M5 12l5 5l10 -10" />
-                </svg>
-              </div>
-            </div>
-            <p className="text-sm leading-none ml-2">
-              I agree with the{" "}
-              <span className="text-indigo-700">terms of service</span>
-            </p>
-          </div>
-        </div> */}
+       
         <button
           role="button"
           aria-label="Next step"

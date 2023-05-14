@@ -24,6 +24,7 @@ function ModalConfirm({
     onReject();
     onHide();
   };
+  console.log("header: ",{header})
 
   return (
     <Modal header={header} isShowing={isShowing} hide={onHide} closeBtn={false}>

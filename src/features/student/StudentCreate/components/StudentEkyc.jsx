@@ -10,7 +10,8 @@ import { toast } from "react-toastify";
 import { studentEkycScheme } from "../../../../validations/studentEkyc";
 import moment from "moment/moment";
 import { v4 as uuidv4 } from 'uuid';
-import {  updateStudentEkyc } from "../../../../features/student/studentSlice";
+import {  updateStudentEkyc } from "../../studentSlice";
+
 
 function StudentEkyc(data) {
   const dispatch = useDispatch();
@@ -34,8 +35,7 @@ function StudentEkyc(data) {
   const [selectedFaceFile, setSelectedFaceFile] = useState();
   const [isCCCDFilePicked, setIsCCCDFilePicked] = useState(false);
   const [isFaceFilePicked, setIsFaceFilePicked] = useState(false);
-
-  // EKYC Details
+  const [thumbnailFile, setThumbnailFile] = useState();// EKYC Details
   const value = watch();
   const [fullNameEkyc, setFullNameEkyc] = useState();
   const [nationalIdEkyc, setNationalIdEkyc] = useState("");
@@ -55,20 +55,21 @@ function StudentEkyc(data) {
     placeOfOrigin: "",
     nationality: "",
   });
-  // setValue('studentId', data.data.studentId)
-  // setValue('phoneNumber', data.data.phoneNumber)
-  const changeCCCDHandler = (event) => {
-    setSelectedCCCDFile(event.target.file);
-    setIsCCCDFilePicked(true);
 
-    console.log("UPLOAD_CCCD");
-    console.log("personEkyc: ",personEkyc)
+  const changeCCCDHandler = (event) => {
+    const file = event.target.files[0];
+    setSelectedCCCDFile(file);
+    setIsCCCDFilePicked(true);
   };
+  
   const handleSubmissionCCCD = () => {
     const formCCCDData = new FormData();
-
     formCCCDData.append("filename", selectedCCCDFile);
-    fetch("http://localhost:8080/portal/file/upload/national-id-card/cccd123", {
+    const studentId = 'n18dccn232';
+    const queryParam = new URLSearchParams({
+      studentId: studentId
+    });
+    fetch(`http://localhost:8080/portal/file/upload/national-id-card/123?${queryParam}`, {
       method: "POST",
       body: formCCCDData,
     })
@@ -108,17 +109,34 @@ function StudentEkyc(data) {
       });
   };
   const changeFaceHandler = (event) => {
-    setSelectedFaceFile(event.target.file);
+    const file = event.target.files[0];
+    setSelectedFaceFile(file);
     setIsFaceFilePicked(true);
+    
+    setThumbnailFile(file);
+    // // Tạo thumbnail từ URL của video
+    // const thumbnail = VideoThumbnail.generate(file);
+    // setThumbnailFile(thumbnail);
+    // if (selectedFaceFile) {
+    //   console.log("UPLOAD_THUMBNAIL");
+    //   Thumbnail.generate(selectedFaceFile, 300, 300, 'jpeg')
+    //     .then(thumbnail => setThumbnailFile(thumbnail))
+    //     .catch(err => console.error(err));
+    // }
+    
 
-    console.log("UPLOAD_Face");
   };
 
   const handleSubmissionFaceImage = () => {
     const formFaceData = new FormData();
-
     formFaceData.append("filename", selectedFaceFile);
-    fetch("http://localhost:8080/portal/file/upload/face-reg/face456", {
+
+    formFaceData.append("thumbnail", thumbnailFile);
+    const studentId = 'n18dccn241';
+    const queryParam = new URLSearchParams({
+      studentId: studentId
+    });
+    fetch(`http://localhost:8080/portal/file/update/face-video/123?${queryParam}`, {
       method: "POST",
       body: formFaceData,
     })
@@ -538,13 +556,19 @@ function StudentEkyc(data) {
             {/* </label> */}
           </div>
         </div>
+        
+        
+        
+        
+        
+        
         <div className="upload-face-image">
           {/* <img src={previewUrl} alt="Preview" style={{ maxWidth: '100%' }} /> */}
 
           <div className="flex items-center justify-center w-full">
             {/* <form onSubmit={handleSubmissionCCCD}> */}
             <label
-              htmlFor="dropzone-file"
+              htmlFor="dropzone-file-2"
               className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -573,18 +597,13 @@ function StudentEkyc(data) {
             </label>
 
             <input
-              id="dropzone-file"
+              id="dropzone-file-2"
               type="file"
-              name="cccd-file"
+              name="face-file"
               className="hidden"
               onChange={changeFaceHandler}
             />
-            {
-              //   <div>
-              //   <img
-              //   src={previewUrl} alt="Ảnh đã chọn" />
-              // </div>
-            }
+
             <div>
               <button
                 type="submit"

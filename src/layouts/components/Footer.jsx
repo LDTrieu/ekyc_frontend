@@ -10,9 +10,9 @@ function Footer() {
     <div className="bg-bg_dark_gray pt-12 pb-9 text-white flex justify-center">
       <div className="max-w-primary px-6 md:px-8 lg:px-[100px] flex-1">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-16">
-          {/* Examify */}
+          {/* FaceSense */}
           <div>
-            <h6 className="font-bold">Examify</h6>
+            <h6 className="font-bold">FaceSense</h6>
 
             <div className="mt-[35px] space-y-2 text-md">
               <Link to="#" className="block">
@@ -24,9 +24,9 @@ function Footer() {
               <Link to="#" className="block">
                 Việc làm
               </Link>
-              <Link to="#" className="block">
+              {/* <Link to="#" className="block">
                 Bằng cấp
-              </Link>
+              </Link> */}
               <Link to="#" className="block">
                 Cho doanh nghiệp
               </Link>
@@ -39,9 +39,9 @@ function Footer() {
               <Link to="#" className="block">
                 Trở thành thành viên
               </Link>
-              <Link to="#" className="block">
+              {/* <Link to="#" className="block">
                 Đầu tư
-              </Link>
+              </Link> */}
             </div>
           </div>
 
@@ -50,24 +50,24 @@ function Footer() {
             <h6 className="font-bold">Cộng đồng</h6>
 
             <div className="mt-[35px] space-y-2 text-md">
-              <Link to="#" className="block">
+              {/* <Link to="#" className="block">
                 Học viên{' '}
-              </Link>
+              </Link> */}
               <Link to="#" className="block">
                 Thành viên
               </Link>
               <Link to="#" className="block">
                 Các nhà phát triển
               </Link>
-              <Link to="#" className="block">
+              {/* <Link to="#" className="block">
                 Phiên dịch viên
-              </Link>
+              </Link> */}
               <Link to="#" className="block">
                 Blog
               </Link>
-              <Link to="#" className="block">
+              {/* <Link to="#" className="block">
                 Trung tâm dạy
-              </Link>
+              </Link> */}
             </div>
           </div>
 
@@ -116,7 +116,7 @@ function Footer() {
             <img src={Logo} alt="Examify Logo" className="h-10" />
           </Link>
 
-          <p className="text-sm">2022 Examify, Inc</p>
+          <p className="text-sm">2023 FaceSense, Inc</p>
         </div>
       </div>
     </div>

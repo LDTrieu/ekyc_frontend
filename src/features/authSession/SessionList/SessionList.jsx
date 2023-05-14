@@ -208,7 +208,7 @@ const SessionList = (props) => {
 //   };
   return (
     <>
-      <div className="py-20">
+      <div className="py-5">
         <div className="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
           <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
             <div className="w-full lg:w-1/3 flex flex-col lg:flex-row items-start lg:items-center">

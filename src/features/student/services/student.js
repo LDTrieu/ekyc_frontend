@@ -12,8 +12,7 @@ export const createStudentProfileService = (
     phoneNumber,
     dateOfBirth,
     unitId,
-    address,
-    image
+    address
 ) => {
     return axiosPrivate.post('/portal/student/create/1', {
         studentId,
@@ -23,8 +22,7 @@ export const createStudentProfileService = (
         phoneNumber,
         dateOfBirth,
         unitId,
-        address,
-        image
+        address
     }, {
         withCredentials: false,
     },)

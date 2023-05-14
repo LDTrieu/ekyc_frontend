@@ -1,5 +1,5 @@
 import ModalDetail from "./ModalDetail";
-import { Button, Input ,Select} from "components/ui";
+import { Button, Input, Select } from "components/ui";
 import moment from "moment/moment";
 import { MdAlternateEmail } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { createAccountProfile } from "features/account/accountSlice";
+import { Option } from "@material-tailwind/react";
 
 function ModalAccountCreate({
   type = "confirm",
@@ -20,7 +21,7 @@ function ModalAccountCreate({
   onHide = () => {},
   onResolve = () => {},
   titleResolve = "",
-  onReject= () => {},
+  onReject = () => {},
   titleReject = "",
 }) {
   const handleResolve = () => {
@@ -40,15 +41,14 @@ function ModalAccountCreate({
     formState: { errors },
   } = useForm({ resolver: yupResolver(signupScheme) });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
   // Handle data that get from form
-  const handleDataForm = async (data,result) => {
+  const handleDataForm = async (data, result) => {
     console.log("data", data);
     const value = watch();
-     result = await dispatch(
-        createAccountProfile({
+    result = await dispatch(
+      createAccountProfile({
         axiosPrivate,
         email: value.email,
         password: value.password,
@@ -64,13 +64,13 @@ function ModalAccountCreate({
       // Conflict
       switch (result.payload.code) {
         case 0:
-          console.log("result.payload",result.payload)
+          console.log("result.payload", result.payload);
           toast.success("Tạo tài khoản thành công!");
           window.location.reload();
           break;
         case 40:
           // setError("email", { message: "Email đã tồn tại" });
-          toast.error("Code 40: "+result.payload.message, {
+          toast.error("Code 40: " + result.payload.message, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -81,46 +81,46 @@ function ModalAccountCreate({
             theme: "light",
           });
           break;
-          case 53:
-            toast.error("Service lỗi! "+result.payload.message, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-            break;
-          case 191:
-            setError("email", { message: "Email đã tồn tại" });
-              toast.error("Email đã tồn tại! "+result.payload.message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
-              break;
-              case 192:
-                setError("phoneNumber", { message: "SĐT đã tồn tại" });
-                toast.error("SĐT đã tồn tại! "+result.payload.message, {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "light",
-                });
-                break;
+        case 53:
+          toast.error("Service lỗi! " + result.payload.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          break;
+        case 191:
+          setError("email", { message: "Email đã tồn tại" });
+          toast.error("Email đã tồn tại! " + result.payload.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          break;
+        case 192:
+          setError("phoneNumber", { message: "SĐT đã tồn tại" });
+          toast.error("SĐT đã tồn tại! " + result.payload.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          break;
         default:
-          toast.error("Lỗi gì đó đã xảy ra!"+result.payload.message, {
+          toast.error("Lỗi gì đó đã xảy ra!" + result.payload.message, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -133,7 +133,7 @@ function ModalAccountCreate({
       }
     }
   };
-return (
+  return (
     <ModalDetail
       header={header}
       isShowing={isShowing}
@@ -151,11 +151,9 @@ return (
         >
           <div>
             <form className="mt-3" onSubmit={handleSubmit(handleDataForm)}>
-            <h1
-          className="text-xl font-semibold leading-7 text-gray-800 mt-5"
-           >
-          Thông tin tài khoản quản lý
-        </h1>
+              <h1 className="text-xl font-semibold leading-7 text-gray-800 mt-5">
+                Thông tin tài khoản quản lý
+              </h1>
               <div className="mt-10">
                 <Input
                   label="Email"
@@ -236,25 +234,14 @@ return (
               </div>
               <div className="mt-6">
                 <Select
-                fancyOutlined
-                 label="Select-UnitId"
-                 {...register("unitId")}
-                 >
+                  fancyOutlined
+                  label="Select-UnitId"
+                  {...register("unitId")}
+                >
                   <option>Admin</option>
                   <option>Nhân sự</option>
                   <option>Kế toán</option>
-                  
-                  {/* <Option>Material Tailwind Vue</Option>
-        <Option>Material Tailwind Angular</Option>
-        <Option>Material Tailwind Svelte</Option> */}
                 </Select>
-
-                {/* <p
-                  data-testid="firstname-error"
-                  className="text-ac_red text-sm mt-1"
-                >
-                  {errors.firstname?.message}
-                </p> */}
               </div>
 
               <div className="mt-6">
@@ -287,6 +274,5 @@ return (
   );
 }
 
-ModalAccountCreate.defaultProps = {
-};
+ModalAccountCreate.defaultProps = {};
 export default ModalAccountCreate;

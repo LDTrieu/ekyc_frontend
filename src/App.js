@@ -15,6 +15,7 @@ const App = () => {
         {/* App */}
         <div className="bg-bg_white">
           <Routes>
+            
             {publicRouters.map((route, index) => {
               let Layout;
               const Page = route.component;

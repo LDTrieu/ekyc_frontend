@@ -124,7 +124,7 @@ function AccountProfile({data,onDataChange }) {
           </div> */}
           <div className="text-center">
             <h1 className="text-h4 font-bold text-primary mt-2">Tạo tài khoản mới</h1>
-            {/* <p className="text-sm text-t_gray">Chào mừng đến với Examify</p> */}
+            {/* <p className="text-sm text-t_gray">Chào mừng đến với FaceSense</p> */}
           </div>
         </div>
 

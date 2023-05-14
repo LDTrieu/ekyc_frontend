@@ -79,7 +79,7 @@ export const getListAccountService = (axiosPrivate) => {
     // }, {
     //     withCredentials: false,
     // },);
-    return axiosPrivate.get('/portal/user/list-pdf/123', {
+    return axiosPrivate.get('/portal/user/download-pdf/123', {
     }, {
         withCredentials: false,
     },);
