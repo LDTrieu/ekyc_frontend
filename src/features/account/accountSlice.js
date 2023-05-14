@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createStore } from "redux";
 import {
     createAccountProfileService,
     updateAccountEkycService,
@@ -7,9 +6,6 @@ import {
 
 const initialState = {
     accountAdded: [],
-    // failAttempt: false,
-    // isLoading: false,
-    // error: '',
 };
 export const createAccountProfile = createAsyncThunk(
     "account/createAccountProfile",

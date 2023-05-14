@@ -7,9 +7,6 @@ import {
 
 const initialState = {
     studentAdded: [],
-    // failAttempt: false,
-    // isLoading: false,
-    // error: '',
 };
 
 export const createStudentProfile = createAsyncThunk(
@@ -24,8 +21,7 @@ export const createStudentProfile = createAsyncThunk(
             phoneNumber,
             dateOfBirth,
             unitId,
-            address,
-            image,
+            address
         },
         thunkAPI
     ) => {
@@ -39,8 +35,7 @@ export const createStudentProfile = createAsyncThunk(
                 phoneNumber,
                 dateOfBirth,
                 unitId,
-                address,
-                image
+                address
             );
             console.log("response", response);
             return response.data;

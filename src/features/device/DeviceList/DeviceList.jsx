@@ -5,8 +5,8 @@ import useFetchAllDevice from "./useFetchAllDevice";
 import useAxiosWithToken from "hooks/useAxiosWithToken";
 import {
   updateDeviceService,
-  getListDeviceService,
-  // getDetailDeviceService,
+  getAllDevicesService,
+  getDetailDeviceService,
   createDeviceService
 } from "../services/device";
 import { toast } from "react-toastify";
@@ -106,186 +106,190 @@ const DeviceList = (props) => {
   //   }
     
   // }
-//   const showDetailDevice=(terminalId)=>{
-//     try {
-//       // const response =
-//       getDetailDeviceService(
-//         axiosPrivate,
-//         deviceId
-//       ).then((response) => {
-//         // console.log("response", response);
-//         switch (response.data.code) {
-//           case 0:
-//             // window.location.reload();
-//             //toast.success("Cập nhật thành công!");
-//             //console.log("response.data", response.data.payload);
-//           const device =response.data.payload
-//             //const device = response.data.payload
-//             console.log("device: ",device)
-//             setSelectedDevice(device)
-//             showDetailModal();
-//             console.log("selectedDevice",device)
-//             break;
-//           case 53:
-//             toast.error("Service lỗi! " + response.data.message, {
-//               position: "top-right",
-//               autoClose: 5000,
-//               hideProgressBar: false,
-//               closeOnClick: true,
-//               pauseOnHover: true,
-//               draggable: true,
-//               progress: undefined,
-//               theme: "light",
-//             });
-//             break;
-//           default:
+  const showDetailDevice=(terminalId)=>{
 
-//             if (response.data.message.length !== 0) {
-//               toast.error(response.message, {
-//                 position: "top-right",
-//                 autoClose: 5000,
-//                 hideProgressBar: false,
-//                 closeOnClick: true,
-//                 pauseOnHover: true,
-//                 draggable: true,
-//                 progress: undefined,
-//                 theme: "light",
-//               });
-//             } else {
-//               toast.error("Lỗi gì đó đã xảy ra tại service!", {
-//                 position: "top-right",
-//                 autoClose: 5000,
-//                 hideProgressBar: false,
-//                 closeOnClick: true,
-//                 pauseOnHover: true,
-//                 draggable: true,
-//                 progress: undefined,
-//                 theme: "light",
-//               });
-//             }
-//         }
-//       });
-//       // console.log("response: ", response.then())
-//     } catch (error) {
-//       console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
-//     }
+    try {
+
+      // const response =
+      getDetailDeviceService(
+        axiosPrivate,
+        "abc"
+      ).then((response) => {
+        // console.log("response", response);
+        switch (response.data.code) {
+          case 0:
+            // window.location.reload();
+            //toast.success("Cập nhật thành công!");
+            //console.log("response.data", response.data.payload);
+          const device =response.data.payload
+            //const device = response.data.payload
+            console.log("response.data.payload: ",response.data.payload)
+            console.log("device: ",device)
+            setSelectedDevice(device)
+            showDetailModal();
+            console.log("selectedDevice",device)
+            break;
+          case 53:
+            toast.error("Service lỗi! " + response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            break;
+          default:
+
+            if (response.data.message.length !== 0) {
+              toast.error(response.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            } else {
+              toast.error("Lỗi gì đó đã xảy ra tại service!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+        }
+      });
+      // console.log("response: ", response.then())
+    } catch (error) {
+      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
+    }
     
-//   }
-//   const BlockDevice = () => {
-//     console.log("selectedDevice: ", selectedDevice);
-//     selectedDevice.isBlocked = !selectedDevice.isBlocked;
-//     try {
-//       // const response =
-//       updateDeviceService(
-//         axiosPrivate,
-//         selectedDevice.terminalId,
-//         selectedDevice.isBlocked
-//       ).then((response) => {
-//         console.log("response", response);
-//         switch (response.data.code) {
-//           case 0:
-//             // window.location.reload();
-//             toast.success("Cập nhật thành công!");
-//             break;
-//           case 53:
-//             toast.error("Service lỗi! " + response.data.message, {
-//               position: "top-right",
-//               autoClose: 5000,
-//               hideProgressBar: false,
-//               closeOnClick: true,
-//               pauseOnHover: true,
-//               draggable: true,
-//               progress: undefined,
-//               theme: "light",
-//             });
-//             break;
-//           default:
-//             console.log("DEFAULT");
-//             if (response.data.message.length !== 0) {
-//               toast.error(response.message, {
-//                 position: "top-right",
-//                 autoClose: 5000,
-//                 hideProgressBar: false,
-//                 closeOnClick: true,
-//                 pauseOnHover: true,
-//                 draggable: true,
-//                 progress: undefined,
-//                 theme: "light",
-//               });
-//             } else {
-//               toast.error("Lỗi gì đó đã xảy ra tại service!", {
-//                 position: "top-right",
-//                 autoClose: 5000,
-//                 hideProgressBar: false,
-//                 closeOnClick: true,
-//                 pauseOnHover: true,
-//                 draggable: true,
-//                 progress: undefined,
-//                 theme: "light",
-//               });
-//             }
-//         }
-//       });
-//       // console.log("response: ", response.then())
-//     } catch (error) {
-//       console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
-//     }
-//   };
+  }
+  
+  const BlockDevice = () => {
+    console.log("selectedDevice: ", selectedDevice);
+    selectedDevice.isBlocked = !selectedDevice.isBlocked;
+    try {
+      // const response =
+      updateDeviceService(
+        axiosPrivate,
+        selectedDevice.terminalId,
+        selectedDevice.isBlocked
+      ).then((response) => {
+        console.log("response", response);
+        switch (response.data.code) {
+          case 0:
+            // window.location.reload();
+            toast.success("Cập nhật thành công!");
+            break;
+          case 53:
+            toast.error("Service lỗi! " + response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            break;
+          default:
+            console.log("DEFAULT");
+            if (response.data.message.length !== 0) {
+              toast.error(response.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            } else {
+              toast.error("Lỗi gì đó đã xảy ra tại service!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+        }
+      });
+      // console.log("response: ", response.then())
+    } catch (error) {
+      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
+    }
+  };
 
-//   const DownloadList = () => {
-//     try {
-//       getListDeviceService(axiosPrivate).then((response) => {
-//         console.log("response", response);
-//         switch (response.data.code) {
-//           case 0:
-//             // window.location.reload();
-//             //toast.success("Cập nhật thành công!");
-//             break;
-//           case 53:
-//             toast.error("Service lỗi! " + response.data.message, {
-//               position: "top-right",
-//               autoClose: 5000,
-//               hideProgressBar: false,
-//               closeOnClick: true,
-//               pauseOnHover: true,
-//               draggable: true,
-//               progress: undefined,
-//               theme: "light",
-//             });
-//             break;
-//           default:
-//             if (response.data.message.length !== 0) {
-//               toast.error(response.message, {
-//                 position: "top-right",
-//                 autoClose: 5000,
-//                 hideProgressBar: false,
-//                 closeOnClick: true,
-//                 pauseOnHover: true,
-//                 draggable: true,
-//                 progress: undefined,
-//                 theme: "light",
-//               });
-//             } else {
-//               toast.error("Lỗi gì đó đã xảy ra tại service!", {
-//                 position: "top-right",
-//                 autoClose: 5000,
-//                 hideProgressBar: false,
-//                 closeOnClick: true,
-//                 pauseOnHover: true,
-//                 draggable: true,
-//                 progress: undefined,
-//                 theme: "light",
-//               });
-//             }
-//         }
-//       });
-//     } catch (error) {
-//       console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
-//     }
-//   };
+  const DownloadList = () => {
+    try {
+      getAllDevicesService(axiosPrivate).then((response) => {
+        console.log("response", response);
+        switch (response.data.code) {
+          case 0:
+            // window.location.reload();
+            //toast.success("Cập nhật thành công!");
+            break;
+          case 53:
+            toast.error("Service lỗi! " + response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            break;
+          default:
+            if (response.data.message.length !== 0) {
+              toast.error(response.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            } else {
+              toast.error("Lỗi gì đó đã xảy ra tại service!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+        }
+      });
+    } catch (error) {
+      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
+    }
+  };
   return (
     <>
-      <div className="py-20">
+      <div className="py-5">
         <div className="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
           <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
             <div className="w-full lg:w-1/3 flex flex-col lg:flex-row items-start lg:items-center">
@@ -575,14 +579,14 @@ const DeviceList = (props) => {
                 {device_list.map((item) => (
                   <tr className="h-24 border-gray-300 dark:border-gray-200 border-b">
                     {/* <p>
-                    {item.deviceId}
+                    {item.terminalId}
                     </p> */}
                     <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                       <input
                         type="radio"
                         className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-gray-200 bg-white dark:bg-gray-800 outline-none"
                         checked={selectedDevice === item}
-                        onChange={() => onSelectDevice(item)}
+                      onChange={() => onSelectDevice(item)}
                       />
                     </td>
                     {/* <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
@@ -661,10 +665,10 @@ const DeviceList = (props) => {
                         </ul>
                       </div>
                       <button className="text-gray-500 rounded cursor-pointer border border-transparent focus:outline-none"
-                     //onClick={detailDevice}
-                    //   onClick={() => {
-                    //     showDetailDevice(item.terminalId);
-                    //   }}
+                    //  onClick={detailDevice}
+                      onClick={() => {
+                        showDetailDevice(item.terminalId);
+                      }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -695,7 +699,7 @@ const DeviceList = (props) => {
         </div>
       </div>
 
-      {/* <ModalConfirm
+      <ModalConfirm
         header="Xác nhận"
         message="Bạn có chắc chắn muốn khóa tài khoản này?"
         isShowing={modalDeleteCloseVisible}
@@ -704,6 +708,7 @@ const DeviceList = (props) => {
         titleResolve="Xác nhận"
         titleReject="Hủy"
       />
+      {/* 
       <ModalConfirm
         header="Xác nhận"
         message="Bạn muốn tải danh sách này?"
@@ -713,17 +718,8 @@ const DeviceList = (props) => {
         titleResolve="Xác nhận"
         titleReject="Hủy"
       />
-      <ModalDeviceDetail
-        header="Detail"
-        //message="Bạn muốn tải danh sách này?"
-         isShowing={modalDetailCloseVisible}
-        //isShowing={false}
-        onHide={hideDetailModal}
-        onResolve={DownloadList}
-        titleResolve="OK"
-        titleReject="Hủy"
-        device={selectedDevice}
-      /> */}
+      */}
+
         <ModalDeviceCreate
         header="Detail"
         // message="Tạo tài khoản quản lý"
@@ -735,6 +731,20 @@ const DeviceList = (props) => {
         titleReject="Hủy"
         // device={selectedDevice}
       />
+            {
+       selectedDevice  && <ModalDeviceDetail
+        header="Detail"
+        message={"selectedDevice.terminalId"}
+         isShowing={modalDetailCloseVisible}
+        //isShowing={false}
+        onHide={hideDetailModal}
+        onResolve={DownloadList}
+        titleResolve="OK"
+        titleReject="Hủy"
+        device={selectedDevice}
+
+      /> 
+    }
     </>
   );
 };

@@ -168,12 +168,12 @@ function Signin() {
         </div> */}
 
         {/* Direct sign up page */}
-        <p className="text-sm text-center text-t_gray mt-5">
+        {/* <p className="text-sm text-center text-t_gray mt-5">
           Bạn chưa có tài khoản?{" "}
           <span className="text-ac_purple font-bold">
             <Link to="/signup">Đăng ký ngay</Link>
           </span>
-        </p>
+        </p> */}
       </div>
     </div>
   );

@@ -1,32 +1,32 @@
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import Logo from '../../assets/Logo.svg';
-import { BiSearch } from 'react-icons/bi';
-import { AiOutlineMenu } from 'react-icons/ai';
-import { AutoComplete, Button, Tag } from '../../components/ui';
-import { useState } from 'react';
-import classNames from 'classnames';
-import { useSpring, animated } from 'react-spring';
-import { useSelector } from 'react-redux';
-import Avatar from './Avatar';
-import debounce from '../../utils/debounce';
-import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
+import Logo from "../../assets/Logo.svg";
+import { BiSearch } from "react-icons/bi";
+import { AiOutlineMenu } from "react-icons/ai";
+import { AutoComplete, Button, Tag } from "../../components/ui";
+import { useState } from "react";
+import classNames from "classnames";
+import { useSpring, animated } from "react-spring";
+import { useSelector } from "react-redux";
+import Avatar from "./Avatar";
+
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 //import { searchCourseService } from '../../features/course/services/course';
-import { printPrice } from '../../utils/formatCurrency';
+import { printPrice } from "../../utils/formatCurrency";
 
 const NAVIGATION_LIST = [
-  ['Sinh viên', '/student'],
-  ['Tài khoản', '/account'],
-  ['Thiết bị', '/device'],
-  // ['Kiểm duyệt tài khoản', '/censorship'],
-  ['Realtime-IO', '/session'],
-  ['Xuất báo cáo', '/report'],
+  ["Realtime-IO", "/session"],
+  ["Xuất báo cáo", "/report"],
 ];
-
+const NAVIGATION_ADMIN_LIST = [
+  ["Nhân viên", "/student"],
+  ["Tài khoản", "/account"],
+  ["Thiết bị", "/device"],
+];
 const initialStyles = {
   opacity: 0,
-  pointerEvents: 'none',
-  top: '50px',
+  pointerEvents: "none",
+  top: "50px",
 };
 
 const SearchItem = ({ course }) => {
@@ -36,7 +36,11 @@ const SearchItem = ({ course }) => {
       className="flex gap-4 hover:bg-bg_light_gray -m-1 p-3 rounded-lg cursor-pointer"
     >
       <div className="flex">
-        <img src={course.image} alt={course.name} className="rounded-lg w-20 aspect-[5/4] m-auto" />
+        <img
+          src={course.image}
+          alt={course.name}
+          className="rounded-lg w-20 aspect-[5/4] m-auto"
+        />
       </div>
       <div className="text-md flex-1 flex flex-col justify-between">
         <p className="font-bold">{course.name}</p>
@@ -56,31 +60,20 @@ const SearchItem = ({ course }) => {
 };
 
 const Header = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [options, setOptions] = useState([]);
   const axiosPrivate = useAxiosPrivate(true);
   let showMenu = false;
   const [props, setSpring] = useSpring(() => initialStyles);
-  const { user } = useSelector((store) => store.auth);
-  console.log("store: ", useSelector((store) => store))
-  console.log("user: ", user)
-
-  // const fetchSearch = useMemo(
-  //   () =>
-  //     debounce(async (value) => {
-  //       try {
-  //         const response = await searchCourseService(axiosPrivate, value, 5);
-  //         setOptions(response.data.data);
-  //       } catch (error) {
-  //         console.log('🚀 ~ file: Header.jsx:40 ~ fetchSearch ~ error', error);
-  //       }
-  //     }, 1000),
-  //   [axiosPrivate],
-  // );
+  const { user, role } = useSelector((store) => store.auth);
+  console.log(
+    "store: ",
+    useSelector((store) => store)
+  );
+  console.log("user: ", user);
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-    // fetchSearch(e.target.value);
   };
 
   const handleToggleMenu = () => {
@@ -89,13 +82,14 @@ const Header = () => {
         ? initialStyles
         : {
             opacity: 1,
-            pointerEvents: 'auto',
-            top: '60px',
-          },
+            pointerEvents: "auto",
+            top: "60px",
+          }
     );
     showMenu = !showMenu;
   };
-const avatar ="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+  const avatar =
+    "https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg";
   return (
     <div className="h-[60px] bg-white shadow-sd_primary flex md:gap-4 xl:gap-14 items-center justify-between lg:justify-start px-6 z-20 sticky top-0">
       {/* Mobile menu toggle */}
@@ -108,7 +102,11 @@ const avatar ="https://png.pngtree.com/png-clipart/20190924/original/pngtree-use
 
       {/* Logo */}
       <Link to="/">
-        <img src={Logo} alt="Examify Logo - Learn and Practice English" className="h-10" />
+        <img
+          src={Logo}
+          alt="Examify Logo - Learn and Practice English"
+          className="h-10"
+        />
       </Link>
 
       {/* Search Bar */}
@@ -118,7 +116,7 @@ const avatar ="https://png.pngtree.com/png-clipart/20190924/original/pngtree-use
           maxWidth="400px"
           onChange={handleChange}
           width="100%"
-          placeholder="Tìm gì đó trên Examify..."
+          placeholder="Tìm gì đó trên FaceSense..."
           leftIcon={<BiSearch className="w-5 h-5" />}
         >
           <ul>
@@ -132,19 +130,37 @@ const avatar ="https://png.pngtree.com/png-clipart/20190924/original/pngtree-use
       </div>
 
       {/* Navigation Bar */}
-      <ul className="text-md items-center gap-6 hidden lg:flex">
-        {NAVIGATION_LIST.map(([title, path], index) => (
-          <li key={index} className="text-t_dark">
-            <Link to={path}>{title}</Link>
-          </li>
-        ))}
-      </ul>
-
+      {user?.role === "ADMIN_ROLE" ? (
+        <ul className="text-md items-center gap-6 hidden lg:flex">
+          {NAVIGATION_ADMIN_LIST.map(([title, path], index) => (
+            <li key={index} className="text-t_dark">
+              <Link to={path}>{title}</Link>
+            </li>
+          ))}
+          {NAVIGATION_LIST.map(([title, path], index) => (
+            <li key={index} className="text-t_dark">
+              <Link to={path}>{title}</Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="text-md items-center gap-6 hidden lg:flex">
+          {NAVIGATION_LIST.map(([title, path], index) => (
+            <li key={index} className="text-t_dark">
+              <Link to={path}>{title}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
       {/* Buttons */}
       <div data-testid="user-avatar" className="gap-4 flex">
         {user.firstName ? (
-          <Avatar avt={user.avt} lastName={user.lastName} firstName={user.firstName} email={user.email} />
-          //<Avatar avt={avatar} lastName={user.lastName} firstName={user.firstName} email={user.email} />
+          <Avatar
+            avt={user.avt}
+            lastName={user.lastName}
+            firstName={user.role}
+            email={user.email}
+          />
         ) : (
           <>
             <Link to="/signin">
@@ -165,18 +181,21 @@ const avatar ="https://png.pngtree.com/png-clipart/20190924/original/pngtree-use
       <animated.div
         style={props}
         className={classNames(
-          'block lg:hidden bg-bg_dark_gray bg-opacity-30 fixed top-[60px] left-0 right-0 bottom-0 border-t overflow-hidden',
+          "block lg:hidden bg-bg_dark_gray bg-opacity-30 fixed top-[60px] left-0 right-0 bottom-0 border-t overflow-hidden"
         )}
         onClick={handleToggleMenu}
       >
-        <div className="bg-white pt-4 rounded-bl-lg rounded-br-lg px-6" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="bg-white pt-4 rounded-bl-lg rounded-br-lg px-6"
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* Search Bar */}
           <div>
             <AutoComplete
               value={search}
               onChange={handleChange}
               width="100%"
-              placeholder="Tìm gì đó trên Examify..."
+              placeholder="Tìm gì đó trên FaceSense..."
               leftIcon={<BiSearch className="w-5 h-5" />}
             >
               <ul>
@@ -188,16 +207,43 @@ const avatar ="https://png.pngtree.com/png-clipart/20190924/original/pngtree-use
               </ul>
             </AutoComplete>
           </div>
-
-          <ul className="text-md py-4">
-            {NAVIGATION_LIST.map(([title, path], index) => (
-              <li key={index} className="text-t_dark">
-                <Link className="block p-3 hover:bg-bg_light_gray_3 transition rounded-md cursor-pointer" to={path}>
-                  {title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {user?.role === "ADMIN_ROLE" ? (
+            <ul className="text-md py-4">
+              {NAVIGATION_LIST.map(([title, path], index) => (
+                <li key={index} className="text-t_dark">
+                  <Link
+                    className="block p-3 hover:bg-bg_light_gray_3 transition rounded-md cursor-pointer"
+                    to={path}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              ))}
+              {NAVIGATION_ADMIN_LIST.map(([title, path], index) => (
+                <li key={index} className="text-t_dark">
+                  <Link
+                    className="block p-3 hover:bg-bg_light_gray_3 transition rounded-md cursor-pointer"
+                    to={path}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="text-md py-4">
+              {NAVIGATION_LIST.map(([title, path], index) => (
+                <li key={index} className="text-t_dark">
+                  <Link
+                    className="block p-3 hover:bg-bg_light_gray_3 transition rounded-md cursor-pointer"
+                    to={path}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </animated.div>
     </div>

@@ -30,10 +30,7 @@ const routes = {
     device: '/device',
 
     // Report
-
-
-
-
+    report: '/report',
 
 };
 
