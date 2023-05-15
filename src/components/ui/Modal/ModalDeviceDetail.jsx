@@ -81,37 +81,6 @@ function ModalDeviceDetail({
                 </div>
               </div>
 
-              {/* <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
-                <div className="md:w-1/2">
-                  <label
-                    htmlFor="expiry"
-                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                  >
-                    Nhân viên tạo
-                  </label>
-                  <Input
-                    type="text"
-                    defaultValue={device.createdBy}
-                    fancyOutlined
-                    readOnly
-                  />
-                </div>
-                <div className="md:w-1/2">
-                  <label
-                    htmlFor="expiry"
-                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                  >
-                    Tình trạng
-                  </label>
-                  <Input
-                    type="text"
-                    defaultValue={device.createdBy}
-                    fancyOutlined
-                    readOnly
-                  />
-                </div>
-              </div> */}
-
               <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
                 <div className="md:w-1/2">
                   <label
@@ -174,40 +143,7 @@ function ModalDeviceDetail({
                   />
                 </div>
               </div>
-              {/* <div className="relative mb-5 mt-2">
-                <label
-                  htmlFor="cvc"
-                  className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                >
-                  CVC
-                </label>
-                <div className="relative mb-5 mt-2">
-                  <div className="absolute right-0 text-gray-600 flex items-center pr-3 h-full cursor-pointer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-info-circle"
-                      width={20}
-                      height={20}
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx={12} cy={12} r={9} />
-                      <line x1={12} y1={8} x2="12.01" y2={8} />
-                      <polyline points="11 12 12 12 12 16 13 16" />
-                    </svg>
-                  </div>
-                  <input
-                    id="cvc"
-                    className="mb-8 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                    placeholder="MM/YY"
-                  />
-                </div>
-              </div> */}
+
               <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
                 <div className="md:w-1/2">
                   <label
