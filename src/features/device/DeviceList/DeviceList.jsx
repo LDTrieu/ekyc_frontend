@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import moment from "moment";
-import useFetchAllDevice from "./useFetchAllDevice";
+import React, { useState } from 'react';
+import moment from 'moment';
+import useFetchAllDevice from './useFetchAllDevice';
 // import useBlockDevice from "./hooks/useBlockDevice";
-import useAxiosWithToken from "hooks/useAxiosWithToken";
+import useAxiosWithToken from 'hooks/useAxiosWithToken';
 import {
   updateDeviceService,
   getAllDevicesService,
   getDetailDeviceService,
-  createDeviceService
-} from "../services/device";
-import { toast } from "react-toastify";
-import { ModalConfirm,
-   ModalDeviceDetail,
-   ModalDeviceCreate } from "components/ui/Modal";
-import { useNavigate } from "react-router-dom";
+  createDeviceService,
+} from '../services/device';
+import { toast } from 'react-toastify';
+import {
+  ModalConfirm,
+  ModalDeviceDetail,
+  ModalDeviceCreate,
+} from 'components/ui/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const DeviceList = (props) => {
   const { device_list } = useFetchAllDevice();
@@ -36,9 +38,8 @@ const DeviceList = (props) => {
   const showModal = () => setModalCloseVisible(true);
   const hideModal = () => setModalCloseVisible(false);
 
-
   const onSelectDevice = (device) => {
-    console.log("item: ", device);
+    console.log('item: ', device);
     setSelectedDevice(device);
   };
 
@@ -104,187 +105,180 @@ const DeviceList = (props) => {
   //   } catch (error) {
   //     console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
   //   }
-    
+
   // }
-  const showDetailDevice=(terminalId)=>{
-
+  const showDetailDevice = (terminalId) => {
     try {
-
       // const response =
-      getDetailDeviceService(
-        axiosPrivate,
-        "abc"
-      ).then((response) => {
+      getDetailDeviceService(axiosPrivate, terminalId).then((response) => {
         // console.log("response", response);
         switch (response.data.code) {
           case 0:
             // window.location.reload();
             //toast.success("Cập nhật thành công!");
             //console.log("response.data", response.data.payload);
-          const device =response.data.payload
+            const device = response.data.payload;
             //const device = response.data.payload
-            console.log("response.data.payload: ",response.data.payload)
-            console.log("device: ",device)
-            setSelectedDevice(device)
+            console.log('response.data.payload: ', response.data.payload);
+            console.log('device: ', device);
+            setSelectedDevice(device);
             showDetailModal();
-            console.log("selectedDevice",device)
+            console.log('selectedDevice', device);
             break;
           case 53:
-            toast.error("Service lỗi! " + response.data.message, {
-              position: "top-right",
+            toast.error('Service lỗi! ' + response.data.message, {
+              position: 'top-right',
               autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "light",
+              theme: 'light',
             });
             break;
           default:
-
             if (response.data.message.length !== 0) {
               toast.error(response.message, {
-                position: "top-right",
+                position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: 'light',
               });
             } else {
-              toast.error("Lỗi gì đó đã xảy ra tại service!", {
-                position: "top-right",
+              toast.error('Lỗi gì đó đã xảy ra tại service!', {
+                position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: 'light',
               });
             }
         }
       });
       // console.log("response: ", response.then())
     } catch (error) {
-      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
+      console.log('🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error', error);
     }
-    
-  }
-  
+  };
+
   const BlockDevice = () => {
-    console.log("selectedDevice: ", selectedDevice);
+    console.log('selectedDevice: ', selectedDevice);
     selectedDevice.isBlocked = !selectedDevice.isBlocked;
     try {
       // const response =
       updateDeviceService(
         axiosPrivate,
         selectedDevice.terminalId,
-        selectedDevice.isBlocked
+        selectedDevice.isBlocked,
       ).then((response) => {
-        console.log("response", response);
+        console.log('response', response);
         switch (response.data.code) {
           case 0:
             // window.location.reload();
-            toast.success("Cập nhật thành công!");
+            toast.success('Cập nhật thành công!');
             break;
           case 53:
-            toast.error("Service lỗi! " + response.data.message, {
-              position: "top-right",
+            toast.error('Service lỗi! ' + response.data.message, {
+              position: 'top-right',
               autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "light",
+              theme: 'light',
             });
             break;
           default:
-            console.log("DEFAULT");
+            console.log('DEFAULT');
             if (response.data.message.length !== 0) {
               toast.error(response.message, {
-                position: "top-right",
+                position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: 'light',
               });
             } else {
-              toast.error("Lỗi gì đó đã xảy ra tại service!", {
-                position: "top-right",
+              toast.error('Lỗi gì đó đã xảy ra tại service!', {
+                position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: 'light',
               });
             }
         }
       });
       // console.log("response: ", response.then())
     } catch (error) {
-      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
+      console.log('🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error', error);
     }
   };
 
   const DownloadList = () => {
     try {
       getAllDevicesService(axiosPrivate).then((response) => {
-        console.log("response", response);
+        console.log('response', response);
         switch (response.data.code) {
           case 0:
             // window.location.reload();
             //toast.success("Cập nhật thành công!");
             break;
           case 53:
-            toast.error("Service lỗi! " + response.data.message, {
-              position: "top-right",
+            toast.error('Service lỗi! ' + response.data.message, {
+              position: 'top-right',
               autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "light",
+              theme: 'light',
             });
             break;
           default:
             if (response.data.message.length !== 0) {
               toast.error(response.message, {
-                position: "top-right",
+                position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: 'light',
               });
             } else {
-              toast.error("Lỗi gì đó đã xảy ra tại service!", {
-                position: "top-right",
+              toast.error('Lỗi gì đó đã xảy ra tại service!', {
+                position: 'top-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: 'light',
               });
             }
         }
       });
     } catch (error) {
-      console.log("🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error", error);
+      console.log('🚀 ~ file: index.jsx:27 ~ pathBlockDevice ~ error', error);
     }
   };
   return (
@@ -361,10 +355,10 @@ const DeviceList = (props) => {
                   className="text-gray-600 dark:text-gray-400 mr-2 p-2 border-transparent border bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-200 cursor-pointer rounded focus:outline-none focus:border-gray-800 focus:shadow-outline-gray"
                   href="javascript: void(0)"
                   // detail test
-                //   onClick={(item) => {
-                //     setSelectedDevice(item)
-                //     showDetailModal();
-                //   }}
+                  //   onClick={(item) => {
+                  //     setSelectedDevice(item)
+                  //     showDetailModal();
+                  //   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -502,12 +496,11 @@ const DeviceList = (props) => {
                 </button>
 
                 <a>
-                <button
+                  <button
                     className="text-white ml-4 cursor-pointer focus:outline-none border border-transparent focus:border-gray-800 focus:shadow-outline-gray bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 w-8 h-8 rounded flex items-center justify-center"
                     // onClick={modalCloseVisible ? hideModal : showModal}
                     onClick={() => {
                       showCreateModal();
-                  
                     }}
                   >
                     <svg
@@ -586,7 +579,7 @@ const DeviceList = (props) => {
                         type="radio"
                         className="cursor-pointer relative w-5 h-5 border rounded border-gray-400 dark:border-gray-200 bg-white dark:bg-gray-800 outline-none"
                         checked={selectedDevice === item}
-                      onChange={() => onSelectDevice(item)}
+                        onChange={() => onSelectDevice(item)}
                       />
                     </td>
                     {/* <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
@@ -638,7 +631,7 @@ const DeviceList = (props) => {
                       {item.modifiedBy}
                     </td>
                     <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                      {moment(Date(item.lastLoginAt)).format("DD/MM/YYYY")}
+                      {moment(Date(item.lastLoginAt)).format('DD/MM/YYYY')}
                     </td>
                     {/* <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                       {item.unitId}
@@ -646,7 +639,7 @@ const DeviceList = (props) => {
                     <td className="pr-6">
                       <div
                         className={`w-2 h-2 rounded-full ${
-                          item.isBlocked ? "bg-red-500" : "bg-green-500"
+                          item.isBlocked ? 'bg-red-500' : 'bg-green-500'
                         }`}
                       />
                     </td>
@@ -664,11 +657,12 @@ const DeviceList = (props) => {
                           </li>
                         </ul>
                       </div>
-                      <button className="text-gray-500 rounded cursor-pointer border border-transparent focus:outline-none"
-                    //  onClick={detailDevice}
-                      onClick={() => {
-                        showDetailDevice(item.terminalId);
-                      }}
+                      <button
+                        className="text-gray-500 rounded cursor-pointer border border-transparent focus:outline-none"
+                        //  onClick={detailDevice}
+                        onClick={() => {
+                          showDetailDevice(item.terminalId);
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -720,10 +714,10 @@ const DeviceList = (props) => {
       />
       */}
 
-        <ModalDeviceCreate
+      <ModalDeviceCreate
         header="Detail"
         // message="Tạo tài khoản quản lý"
-         isShowing={modalCreateCloseVisible}
+        isShowing={modalCreateCloseVisible}
         //isShowing={false}
         onHide={hideCreateModal}
         // onResolve={CreateDevice}
@@ -731,20 +725,19 @@ const DeviceList = (props) => {
         titleReject="Hủy"
         // device={selectedDevice}
       />
-            {
-       selectedDevice  && <ModalDeviceDetail
-        header="Detail"
-        message={"selectedDevice.terminalId"}
-         isShowing={modalDetailCloseVisible}
-        //isShowing={false}
-        onHide={hideDetailModal}
-        onResolve={DownloadList}
-        titleResolve="OK"
-        titleReject="Hủy"
-        device={selectedDevice}
-
-      /> 
-    }
+      {selectedDevice && (
+        <ModalDeviceDetail
+          header="Detail"
+          message={'selectedDevice.terminalId'}
+          isShowing={modalDetailCloseVisible}
+          //isShowing={false}
+          onHide={hideDetailModal}
+          onResolve={DownloadList}
+          titleResolve="OK"
+          titleReject="Hủy"
+          device={selectedDevice}
+        />
+      )}
     </>
   );
 };
