@@ -1,17 +1,17 @@
-import ModalDetail from "./ModalDetail";
-import { Button, Input } from "components/ui";
-import moment from "moment/moment";
+import ModalDetail from './ModalDetail';
+import { Button, Input } from 'components/ui';
+import moment from 'moment/moment';
 
 function ModalAccountDetail({
-  type = "confirm",
-  header = "",
-  message = "",
+  type = 'confirm',
+  header = '',
+  message = '',
   isShowing = false,
   onHide = () => {},
   onResolve = () => {},
-  titleResolve = "",
+  titleResolve = '',
   onReject = () => {},
-  titleReject = "",
+  titleReject = '',
   account,
 }) {
   const handleResolve = () => {
@@ -22,25 +22,24 @@ function ModalAccountDetail({
     onReject();
     onHide();
   };
+  console.log('account: ', account);
   const accountDetail = {
-    accountId: account?.accountId ?? "BBB",
-    address: account?.address ?? "as",
-    birthday: account?.birthday ?? "as",
+    accountId: account?.accountId ?? '',
+    address: account?.address ?? '',
+    birthday: account?.birthday ?? '',
     createdAt: account?.createdAt ?? new Date(),
-    createdBy: account?.createdBy ?? "new Date()",
-    email: account?.email ?? "sdsdsd",
-    fullName: account?.fullName ?? "sdsdsd",
-    image: account?.image ?? "dssd",
-    imageEkyc: account?.imageEkyc ?? "sdsd",
+    createdBy: account?.createdBy ?? '',
+    email: account?.email ?? '',
+    fullName: account?.fullName ?? '',
+    image: account?.image ?? '',
+    imageEkyc: account?.imageEkyc ?? '',
     isBlocked: account?.isBlocked ?? true,
     modifiedAt: account?.modifiedAt ?? new Date(),
-    modifiedBy: account?.modifiedBy ?? "new Date()",
-    nationalId: account?.nationalId ?? "sdsd",
-    phoneNumber: account?.phoneNumber ?? "sdsd",
-    unitId: account?.unitId ?? "sdsd",
+    modifiedBy: account?.modifiedBy ?? '',
+    nationalId: account?.nationalId ?? '',
+    phoneNumber: account?.phoneNumber ?? '',
+    unitId: account?.unitId ?? '',
   };
-  console.log("accountModal", accountDetail);
-  console.log("accountModal.fullName", accountDetail.fullName);
   return (
     <ModalDetail
       header={header}
@@ -50,153 +49,149 @@ function ModalAccountDetail({
     >
       <p>{message}</p>
       <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridColumnGap: "20px" }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gridColumnGap: '20px',
+          }}
+        >
           <div>
             <div>
-              {/* {type === 'confirm' && (
-            <Button type="outline" height={36} onClick={handleReject}>
-              {titleReject}
-            </Button>
-          )} */}
-              {/* <Button height={36} onClick={handleResolve}>
-            {titleResolve}
-          </Button> */}
-                <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
-                <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Họ và tên
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Mã số sinh viên
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-              </div>
-            
-              
+              <h1 className="text-xl font-semibold leading-7 text-gray-800 mt-5">
+                Thông tin tài khoản quản lý
+              </h1>
               <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
                 <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Mã lớp
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Số điện thoại
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-              </div>
-              
-              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Họ và tên
+                  </label>
+                  <Input
+                    type="text"
+                    value={accountDetail.fullName}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
                 <div className="md:w-1/2">
-               
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Ngày sinh
-                    </label>
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Mã số nhân viên
+                  </label>
+                  <Input
+                    // label="Số điện thoại"
+                    type="text"
+                    value={accountDetail.accountId}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
+              </div>
 
-                    <Input
-                      type="date"
-                      defaultValue={moment(accountDetail.dateOfBirth).format(
-                        "YYYY-MM-DD"
-                      )}
-                      fancyOutlined
-                      readOnly
+              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
+                <div className="md:w-1/2">
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Mã đơn vị
+                  </label>
+                  <Input
+                    // label="Số điện thoại"
+                    type="text"
+                    value={accountDetail.unitId}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
+                <div className="md:w-1/2">
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Số điện thoại
+                  </label>
+                  <Input
+                    // label="Số điện thoại"
+                    type="text"
+                    value={accountDetail.phoneNumber}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
+              </div>
 
-                    />
-    
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Địa chỉ
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-          
+              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
+                <div className="md:w-1/2">
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Ngày sinh
+                  </label>
+                  <Input
+                    type="date"
+                    value={moment(accountDetail.dateOfBirth).format(
+                      'YYYY-MM-DD',
+                    )}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
+                <div className="md:w-1/2">
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Địa chỉ
+                  </label>
+                  <Input
+                    // label="Số điện thoại"
+                    type="text"
+                    value={accountDetail.phoneNumber}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
               </div>
               <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
                 <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Email
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Trạng thái
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Email
+                  </label>
+                  <Input
+                    // label="Số điện thoại"
+                    type="text"
+                    value={accountDetail.email}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
+                <div className="md:w-1/2">
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Trạng thái khóa
+                  </label>
+                  <Input
+                    // label="Số điện thoại"
+                    type="text"
+                    value={
+                      accountDetail.isBlocked ? 'Đã khóa' : 'Đang hoạt động'
+                    }
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
               </div>
               {/* <div className="relative mb-5 mt-2">
                 <label
@@ -232,37 +227,38 @@ function ModalAccountDetail({
                   />
                 </div>
               </div> */}
-                <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
+              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
                 <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      AAAA
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      BBBB
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Người tạo
+                  </label>
+                  <Input
+                    // label="Số điện thoại"
+                    type="text"
+                    value={accountDetail.modifiedBy}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
+                <div className="md:w-1/2">
+                  <label
+                    htmlFor="expiry"
+                    className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >
+                    Thời gian tạo
+                  </label>
+                  <Input
+                    type="date"
+                    value={moment(accountDetail.modifiedAt).format(
+                      'YYYY-MM-DD',
+                    )}
+                    fancyOutlined
+                    readOnly
+                  />
+                </div>
               </div>
               {/* <div className="relative mb-5 mt-2">
                 <label
@@ -298,248 +294,54 @@ function ModalAccountDetail({
                   />
                 </div>
               </div> */}
-<div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
-              <div className="flex items-center justify-start w-full">
-                <button
-                  className="focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
-                  onClick={handleResolve}
-                >
-                  Submit
-                </button>
-                <button
-                  className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
-                  // onclick="modalHandler()"
-                  onClick={handleReject}
-                  //  {titleReject}
-                  // Hủy
-                >
-                  {/* <Button type="outline" height={36} onClick={handleReject}>
+              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
+                <div className="flex items-center justify-start w-full">
+                  <button
+                    className="focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                    onClick={handleResolve}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+                    // onclick="modalHandler()"
+                    onClick={handleReject}
+                    //  {titleReject}
+                    // Hủy
+                  >
+                    {/* <Button type="outline" height={36} onClick={handleReject}>
               {titleReject}
             </Button> */}
-                  Cancel
-                </button>
-              </div>
-              <div
-                className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
-                //   onclick="modalHandler()"
-                onClick={handleReject}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-label="Close"
-                  className="icon icon-tabler icon-tabler-x"
-                  width={20}
-                  height={20}
-                  viewBox="0 0 24 24"
-                  strokeWidth="2.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                    Cancel
+                  </button>
+                </div>
+                <div
+                  className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                  //   onclick="modalHandler()"
+                  onClick={handleReject}
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <line x1={18} y1={6} x2={6} y2={18} />
-                  <line x1={6} y1={6} x2={18} y2={18} />
-                </svg>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div>
-              {/* {type === 'confirm' && (
-            <Button type="outline" height={36} onClick={handleReject}>
-              {titleReject}
-            </Button>
-          )} */}
-              {/* <Button height={36} onClick={handleResolve}>
-            {titleResolve}
-          </Button> */}
-
-              {/* <div className="flex flex-col">  */}
-              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
-                <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Họ và tên
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Mã số sinh viên
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-              </div>
-              
-              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
-                <div className="md:w-1/2">
-               
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Ngày sinh
-                    </label>
-
-                    <Input
-                      type="date"
-                      defaultValue={moment(accountDetail.dateOfBirth).format(
-                        "YYYY-MM-DD"
-                      )}
-                      fancyOutlined
-                      readOnly
-
-                    />
-    
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Số điện thoại
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-          
-              </div>
-              <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-5">
-                <div className="md:w-1/2">
-               
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Ngày sinh
-                    </label>
-
-                    <Input
-                      type="date"
-                      defaultValue={moment(accountDetail.dateOfBirth).format(
-                        "YYYY-MM-DD"
-                      )}
-                      fancyOutlined
-                      readOnly
-
-                    />
-    
-                  </div>
-                  <div className="md:w-1/2">
-                    <label
-                      htmlFor="expiry"
-                      className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                    >
-                      Số điện thoại
-                    </label>
-                    <Input
-                      // label="Số điện thoại"
-                      type ="text"
-                      defaultValue={accountDetail.phoneNumber}
-                      fancyOutlined
-                      readOnly
-                    />
-                  </div>
-          
-              </div>
-              <div className="relative mb-5 mt-2">
-                <label
-                  htmlFor="cvc"
-                  className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                >
-                  CVC
-                </label>
-                <div className="relative mb-5 mt-2">
-                  <div className="absolute right-0 text-gray-600 flex items-center pr-3 h-full cursor-pointer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-info-circle"
-                      width={20}
-                      height={20}
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx={12} cy={12} r={9} />
-                      <line x1={12} y1={8} x2="12.01" y2={8} />
-                      <polyline points="11 12 12 12 12 16 13 16" />
-                    </svg>
-                  </div>
-                  <input
-                    id="cvc"
-                    className="mb-8 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                    placeholder="MM/YY"
-                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="Close"
+                    className="icon icon-tabler icon-tabler-x"
+                    width={20}
+                    height={20}
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1={18} y1={6} x2={6} y2={18} />
+                    <line x1={6} y1={6} x2={18} y2={18} />
+                  </svg>
                 </div>
               </div>
-              <div className="relative mb-5 mt-2">
-                <label
-                  htmlFor="cvc"
-                  className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
-                >
-                  CVC
-                </label>
-                <div className="relative mb-5 mt-2">
-                  <div className="absolute right-0 text-gray-600 flex items-center pr-3 h-full cursor-pointer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-info-circle"
-                      width={20}
-                      height={20}
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx={12} cy={12} r={9} />
-                      <line x1={12} y1={8} x2="12.01" y2={8} />
-                      <polyline points="11 12 12 12 12 16 13 16" />
-                    </svg>
-                  </div>
-                  <input
-                    id="cvc"
-                    className="mb-8 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                    placeholder="MM/YY"
-                  />
-                </div>
-              </div>
-
-    
             </div>
           </div>
         </div>
-        
       </div>
       {/* </div> */}
     </ModalDetail>

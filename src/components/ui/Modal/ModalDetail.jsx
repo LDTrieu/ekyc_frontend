@@ -47,16 +47,7 @@ const ModalDetail = ({
           )}
           onClick={(e) => e.stopPropagation()}
         >
-         {/* {!excludeHeader && (
-          <header className="font-bold text-black text-h3 flex justify-between gap-4">
-            {header}
-            {closeBtn && (
-              <button onClick={hide} className="p-[6px] bg-bg_light_gray_2 rounded-full h-fit">
-                <IoCloseOutline />{' '}
-              </button>
-            )}
-          </header>
-        )} */}
+
         <div className="">{children}</div>
 
         </div>

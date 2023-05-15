@@ -1,30 +1,29 @@
-import ModalDetail from "./ModalDetail";
-import { Button, Input, Select } from "components/ui";
-import moment from "moment/moment";
-import { MdOutlinePhoneIphone } from "react-icons/md";
-import { toast } from "react-toastify";
-import { signUp } from "features/auth/authSlice";
-import { deviceSignupScheme } from "validations/deviceSignup";
-import { signupScheme } from "validations/signup";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import useAxiosPrivate from "hooks/useAxiosPrivate";
-import { createDeviceProfile } from "features/device/deviceSlice";
+import ModalDetail from './ModalDetail';
+import { Button, Input, Select } from 'components/ui';
+import moment from 'moment/moment';
+import { MdOutlinePhoneIphone } from 'react-icons/md';
+import { toast } from 'react-toastify';
+import { signUp } from 'features/auth/authSlice';
+import { deviceSignupScheme } from 'validations/deviceSignup';
+import { signupScheme } from 'validations/signup';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import { createDeviceProfile } from 'features/device/deviceSlice';
 
 function ModalDeviceCreate({
-  type = "confirm",
-  header = "",
-  message = "",
+  type = 'confirm',
+  header = '',
+  message = '',
   isShowing = false,
   onHide = () => {},
   onResolve = () => {},
-  titleResolve = "",
-  onReject= () => {},
-  titleReject = "",
+  titleResolve = '',
+  onReject = () => {},
+  titleReject = '',
 }) {
-
   // Get some APIs to manage form
   const {
     register,
@@ -38,75 +37,75 @@ function ModalDeviceCreate({
   const axiosPrivate = useAxiosPrivate();
 
   // Handle data that get from form
-  const handleDataForm = async (data,result) => {
-    console.log("data", data);
+  const handleDataForm = async (data, result) => {
+    console.log('data', data);
     const value = watch();
-     result = await dispatch(
+    result = await dispatch(
       createDeviceProfile({
         axiosPrivate,
         terminalId: value.terminalId,
         password: value.password,
         terminalName: value.terminalName,
-      })
+      }),
     );
-    if (result.type === "auth/createDeviceService/fulfilled") {
-      toast.success("Đăng ký tài khoản thành công, vui lòng đăng nhập!");
+    if (result.type === 'auth/createDeviceService/fulfilled') {
+      toast.success('Đăng ký tài khoản thành công, vui lòng đăng nhập!');
     } else {
       // Conflict
       switch (result.payload.code) {
         case 0:
-          console.log("result.payload", result.payload);
-          toast.success("Tạo tài khoản thành công!");
+          console.log('result.payload', result.payload);
+          toast.success('Tạo tài khoản thành công!');
           window.location.reload();
           break;
         case 40:
-          toast.error("Code 40: " + result.payload.message, {
-            position: "top-right",
+          toast.error('Code 40: ' + result.payload.message, {
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: 'light',
           });
           break;
         case 53:
-          toast.error("Service lỗi! " + result.payload.message, {
-            position: "top-right",
+          toast.error('Service lỗi! ' + result.payload.message, {
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: 'light',
           });
           break;
         case 191:
-          setError("terminalId", { message: "TerminalId đã tồn tại" });
-          toast.error("TerminalId đã tồn tại! " + result.payload.message, {
-            position: "top-right",
+          setError('terminalId', { message: 'TerminalId đã tồn tại' });
+          toast.error('TerminalId đã tồn tại! ' + result.payload.message, {
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: 'light',
           });
           break;
 
         default:
-          toast.error("Lỗi gì đó đã xảy ra!" + result.payload.message, {
-            position: "top-right",
+          toast.error('Lỗi gì đó đã xảy ra!' + result.payload.message, {
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: 'light',
           });
       }
     }
@@ -122,29 +121,26 @@ function ModalDeviceCreate({
       <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridColumnGap: "20px",
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gridColumnGap: '20px',
           }}
         >
           <div>
             <form className="mt-3" onSubmit={handleSubmit(handleDataForm)}>
-            <h1
-          className="text-xl font-semibold leading-7 text-gray-800 mt-5"
-           > Thông tin tài khoản thiết bị
+              <h1 className="text-xl font-semibold leading-7 text-gray-800 mt-5">
+                {' '}
+                Thông tin tài khoản thiết bị
               </h1>
               <div className="mt-10">
                 <Input
                   label="Mã tài khoản"
                   rightIcon={<MdOutlinePhoneIphone />}
-                  {...register("terminalId")}
+                  {...register('terminalId')}
                   fancyOutlined
-                  status={errors.terminalId?.message ? "error" : ""}
+                  status={errors.terminalId?.message ? 'error' : ''}
                 />
-                <p
-     
-                  className="text-ac_red text-sm mt-1"
-                >
+                <p className="text-ac_red text-sm mt-1">
                   {errors.terminalId?.message}
                 </p>
               </div>
@@ -154,14 +150,11 @@ function ModalDeviceCreate({
                   label="Mật khẩu"
                   type="password"
                   visibilityToggle
-                  {...register("password")}
+                  {...register('password')}
                   fancyOutlined
-                  status={errors.password?.message ? "error" : ""}
+                  status={errors.password?.message ? 'error' : ''}
                 />
-                <p
-    
-                  className="text-ac_red text-sm mt-1"
-                >
+                <p className="text-ac_red text-sm mt-1">
                   {errors.password?.message}
                 </p>
               </div>
@@ -171,14 +164,11 @@ function ModalDeviceCreate({
                   label="Xác nhận mật khẩu"
                   type="password"
                   visibilityToggle
-                 {...register("passwordConfirmation")}
+                  {...register('passwordConfirmation')}
                   fancyOutlined
-                  status={errors.passwordConfirmation?.message ? "error" : ""}
+                  status={errors.passwordConfirmation?.message ? 'error' : ''}
                 />
-                <p
-    
-                  className="text-ac_red text-sm mt-1"
-                >
+                <p className="text-ac_red text-sm mt-1">
                   {errors.passwordConfirmation?.message}
                 </p>
               </div>
@@ -186,14 +176,11 @@ function ModalDeviceCreate({
               <div className="mt-6">
                 <Input
                   label="Tên thiết bị"
-                  {...register("terminalName")}
+                  {...register('terminalName')}
                   fancyOutlined
-                  status={errors.terminalName?.message ? "error" : ""}
+                  status={errors.terminalName?.message ? 'error' : ''}
                 />
-                <p
-       
-                  className="text-ac_red text-sm mt-1"
-                >
+                <p className="text-ac_red text-sm mt-1">
                   {errors.terminalName?.message}
                 </p>
               </div>
@@ -212,6 +199,5 @@ function ModalDeviceCreate({
   );
 }
 
-ModalDeviceCreate.defaultProps = {
-};
+ModalDeviceCreate.defaultProps = {};
 export default ModalDeviceCreate;

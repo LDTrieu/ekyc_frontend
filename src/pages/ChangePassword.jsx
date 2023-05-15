@@ -43,7 +43,7 @@ const ChangePassword = () => {
 
   return (
     //layout
-    <div className="mx-6 h-screen sm:px-[100px] grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-5 items-center overflow-auto">
+         <div className="mx-6 h-screen sm:px-[100px] grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-5 items-center overflow-auto">
       {/* Modal */}
       <div className="min-w-[280px] h-[680px] flex my-6 col-span-4 md:col-span-6 lg:col-span-10 lg:col-start-2 xl:col-span-8 xl:col-start-3 rounded-3xl md:border border-br_gray overflow-hidden items-center">
         {/* image */}

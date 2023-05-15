@@ -1,16 +1,16 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { signinScheme } from "../validations/signin";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { signinScheme } from '../validations/signin';
 
-import logo from "../assets/circle_logo.png";
+import logo from '../assets/circle_logo.png';
 // import { FcGoogle } from 'react-icons/fc';
-import { Input, Button } from "../components/ui";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { MdAlternateEmail } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { getUserInfo, signIn } from "../features/auth/authSlice";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { toast } from "react-toastify";
+import { Input, Button } from '../components/ui';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { MdAlternateEmail } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { getUserInfo, signIn } from '../features/auth/authSlice';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { toast } from 'react-toastify';
 
 function Signin() {
   // Get some APIs to manage form
@@ -24,7 +24,7 @@ function Signin() {
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+  let from = location.state?.from?.pathname || '/';
 
   // Handle data that get from form
   const handleDataForm = async (data) => {
@@ -36,50 +36,50 @@ function Signin() {
       signIn({
         email,
         password,
-      })
+      }),
     );
-    console.log("sign in result: ", result);
-    if (result.type === "auth/signIn/fulfilled") {
+    console.log('sign in result: ', result);
+    if (result.type === 'auth/signIn/fulfilled') {
       if (result.payload.code === 43) {
         // Handle error
-        setError("email", { message: " " });
-        setError("password", { message: "Sai email hoặc mật khẩu" });
-        console.log("43");
+        setError('email', { message: ' ' });
+        setError('password', { message: 'Sai email hoặc mật khẩu' });
+        console.log('43');
       } else if (result.payload.code === 53) {
-        toast.error("Lỗi gì đó đã xảy ra!", {
-          position: "top-right",
+        toast.error('Lỗi gì đó đã xảy ra!', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: 'light',
         });
-        console.log("53");
+        console.log('53');
       } else {
         //   // Navigate if success
         // await dispatch(getUserInfo(axiosPrivate));
-        if (from.includes("/signin")) from = "/";
+        if (from.includes('/signin')) from = '/';
         navigate(from, { replace: true });
         // get from STATE
       }
     } else {
       // Handle error
-      setError("email", { message: " " });
-      console.log("ELSE ERR:")
+      setError('email', { message: ' ' });
+      console.log('ELSE ERR:');
       if (result.payload === 401 || result.payload === 404) {
-        setError("password", { message: "Sai email hoặc mật khẩu" });
+        setError('password', { message: 'Sai email hoặc mật khẩu' });
       } else {
-        toast.error("Lỗi gì đó đã xảy ra!", {
-          position: "top-right",
+        toast.error('Lỗi gì đó đã xảy ra!', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: 'light',
         });
       }
     }
@@ -110,9 +110,9 @@ function Signin() {
             <Input
               label="Email"
               rightIcon={<MdAlternateEmail />}
-              {...register("email")}
+              {...register('email')}
               fancyOutlined
-              status={errors.email?.message ? "error" : ""}
+              status={errors.email?.message ? 'error' : ''}
             />
             <p data-testid="email-error" className="text-ac_red text-sm mt-1">
               {errors.email?.message}
@@ -123,10 +123,10 @@ function Signin() {
             <Input
               label="Mật khẩu"
               type="password"
-              {...register("password")}
+              {...register('password')}
               fancyOutlined
               visibilityToggle
-              status={errors.password?.message ? "error" : ""}
+              status={errors.password?.message ? 'error' : ''}
             />
             <p
               data-testid="password-error"

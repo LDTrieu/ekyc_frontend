@@ -16,6 +16,7 @@ export const createAccountProfile = createAsyncThunk(
             email,
             password,
             unitId,
+            role,
             phoneNumber,
             dateOfBirth,
         },
@@ -28,6 +29,7 @@ export const createAccountProfile = createAsyncThunk(
                 email,
                 password,
                 unitId,
+                role,
                 phoneNumber,
                 dateOfBirth,
             );

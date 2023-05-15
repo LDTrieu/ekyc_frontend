@@ -1,17 +1,17 @@
-import ModalDetail from "./ModalDetail";
-import { Button, Input } from "components/ui";
-import moment from "moment/moment";
+import ModalDetail from './ModalDetail';
+import { Button, Input } from 'components/ui';
+import moment from 'moment/moment';
 
 function ModalDeviceDetail({
-  type = "confirm",
-  header = "",
-  message = "",
+  type = 'confirm',
+  header = '',
+  message = '',
   isShowing = false,
   onHide = () => {},
   onResolve = () => {},
-  titleResolve = "",
+  titleResolve = '',
   onReject = () => {},
-  titleReject = "",
+  titleReject = '',
   device,
 }) {
   const handleResolve = () => {
@@ -34,9 +34,9 @@ function ModalDeviceDetail({
       <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridColumnGap: "20px",
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gridColumnGap: '20px',
           }}
         >
           <div>
@@ -136,9 +136,7 @@ function ModalDeviceDetail({
                   </label>
                   <Input
                     type="date"
-                    defaultValue={moment(device.createdAt).format(
-                      "YYYY-MM-DD"
-                    )}
+                    defaultValue={moment(device.createdAt).format('YYYY-MM-DD')}
                     fancyOutlined
                     readOnly
                   />
@@ -169,7 +167,7 @@ function ModalDeviceDetail({
                   <Input
                     type="date"
                     defaultValue={moment(device.modifiedAt).format(
-                      "YYYY-MM-DD"
+                      'YYYY-MM-DD',
                     )}
                     fancyOutlined
                     readOnly
@@ -221,7 +219,7 @@ function ModalDeviceDetail({
                   <Input
                     // label="Số điện thoại"
                     type="text"
-                    defaultValue={device.isBlocked?"Đã khóa":"Hoạt động"}
+                    defaultValue={device.isBlocked ? 'Đã khóa' : 'Hoạt động'}
                     fancyOutlined
                     readOnly
                   />
@@ -236,7 +234,7 @@ function ModalDeviceDetail({
                   <Input
                     type="date"
                     defaultValue={moment(device.lastLoginAt).format(
-                      "YYYY-MM-DD"
+                      'YYYY-MM-DD',
                     )}
                     fancyOutlined
                     readOnly
@@ -476,7 +474,6 @@ function ModalDeviceDetail({
           </div>
         </div>
       </div>
-
     </ModalDetail>
   );
 }

@@ -1,31 +1,30 @@
-import ModalDetail from "./ModalDetail";
-import { Button, Input } from "components/ui";
-import moment from "moment/moment";
-import { MdAlternateEmail } from "react-icons/md";
-import { toast } from "react-toastify";
-import React from "react";
-import { v4 as uuidv4 } from "uuid";
+import ModalDetail from './ModalDetail';
+import { Button, Input } from 'components/ui';
+import moment from 'moment/moment';
+import { MdAlternateEmail } from 'react-icons/md';
+import { toast } from 'react-toastify';
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-import { signupScheme } from "validations/signup";
-import {  useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import useAxiosPrivate from "hooks/useAxiosPrivate";
-import { createStudentProfile } from "features/student/studentSlice";
+import { signupScheme } from 'validations/signup';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import { createStudentProfile } from 'features/student/studentSlice';
 
 function ModalStudentCreate({
-  type = "confirm",
-  header = "",
-  message = "",
+  type = 'confirm',
+  header = '',
+  message = '',
   isShowing = false,
   onHide = () => {},
   onResolve = () => {},
-  titleResolve = "",
+  titleResolve = '',
   onReject = () => {},
-  titleReject = "",
+  titleReject = '',
 }) {
-  
   const changeFaceHandler = (event) => {
     const file = event.target.files[0];
     setSelectedFaceFile(file);
@@ -34,41 +33,40 @@ function ModalStudentCreate({
 
   const handleSubmissionFaceImage = () => {
     const formFaceData = new FormData();
-    formFaceData.append("filename", selectedFaceFile);
+    formFaceData.append('filename', selectedFaceFile);
 
-    formFaceData.append("thumbnail", selectedFaceFile);
-    const studentId = "n18dccn241";
+    formFaceData.append('thumbnail', selectedFaceFile);
+    const studentId = 'n18dccn241';
     const queryParam = new URLSearchParams({
       studentId: studentId,
     });
     fetch(
       `http://localhost:8080/portal/file/update/face-video/123?${queryParam}`,
       {
-        method: "POST",
+        method: 'POST',
         body: formFaceData,
-      }
+      },
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log("Success: ", result);
+        console.log('Success: ', result);
         //setValue('personId', result.payload.personId)
         const unique_id = uuidv4();
-        setValue("personId", unique_id.slice(0, 8));
-        setValue("faceImageURL", result.payload.faceImageURL);
-        toast.success("Upload face image thành công!");
-
+        setValue('personId', unique_id.slice(0, 8));
+        setValue('faceImageURL', result.payload.faceImageURL);
+        toast.success('Upload face image thành công!');
       })
       .catch((error) => {
-        console.log("Error: ", error);
-        toast.error("Lỗi upload Face Image " + error, {
-          position: "top-right",
+        console.log('Error: ', error);
+        toast.error('Lỗi upload Face Image ' + error, {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: 'light',
         });
       });
   };
@@ -86,11 +84,11 @@ function ModalStudentCreate({
   const axiosPrivate = useAxiosPrivate();
   const { useState } = React;
   const [selectedFaceFile, setSelectedFaceFile] = useState();
-    const [isFaceFilePicked, setIsFaceFilePicked] = useState(false);
+  const [isFaceFilePicked, setIsFaceFilePicked] = useState(false);
 
   // Handle data that get from form
   const handleDataForm = async (data, result) => {
-    console.log("data", data);
+    console.log('data', data);
     const value = watch();
     result = await dispatch(
       createStudentProfile({
@@ -100,13 +98,13 @@ function ModalStudentCreate({
         firstName: value.firstName,
         lastName: value.lastName,
         phoneNumber: value.phoneNumber,
-        dateOfBirth: moment(value.dateOfBirth).format("YYYY-MM-DDTHH:mm:ssZ"),
+        dateOfBirth: moment(value.dateOfBirth).format('YYYY-MM-DDTHH:mm:ssZ'),
         address: value.address,
         gender: value.gender,
         unitId: value.unitId,
-      })
+      }),
     );
-    console.log("AAA");
+    console.log('AAA');
     // if (result.type === "auth/createStudentProfileService/fulfilled") {
     //   toast.success("Thêm nhân viên thành công, vui lòng  kiểm tra!");
     // } else {
@@ -193,9 +191,9 @@ function ModalStudentCreate({
       <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridColumnGap: "20px",
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gridColumnGap: '20px',
           }}
         >
           <div>
@@ -206,9 +204,9 @@ function ModalStudentCreate({
               <div className="mt-6">
                 <Input
                   label="Họ và tên đệm"
-                  {...register("firstName")}
+                  {...register('firstName')}
                   fancyOutlined
-                  status={errors.firstName?.message ? "error" : ""}
+                  status={errors.firstName?.message ? 'error' : ''}
                 />
                 <p
                   data-testid="fullName-error"
@@ -221,9 +219,9 @@ function ModalStudentCreate({
               <div className="mt-6">
                 <Input
                   label="Tên"
-                  {...register("lastName")}
+                  {...register('lastName')}
                   fancyOutlined
-                  status={errors.lastName?.message ? "error" : ""}
+                  status={errors.lastName?.message ? 'error' : ''}
                 />
                 <p
                   data-testid="fullName-error"
@@ -236,9 +234,9 @@ function ModalStudentCreate({
                 <Input
                   label="Email"
                   rightIcon={<MdAlternateEmail />}
-                  {...register("email")}
+                  {...register('email')}
                   fancyOutlined
-                  status={errors.email?.message ? "error" : ""}
+                  status={errors.email?.message ? 'error' : ''}
                 />
                 <p
                   data-testid="email-error"
@@ -251,9 +249,9 @@ function ModalStudentCreate({
               <div className="mt-6">
                 <Input
                   label="Số điện thoại"
-                  {...register("phoneNumber")}
+                  {...register('phoneNumber')}
                   fancyOutlined
-                  status={errors.phoneNumber?.message ? "error" : ""}
+                  status={errors.phoneNumber?.message ? 'error' : ''}
                 />
                 <p
                   data-testid="phoneNumber-error"
@@ -268,7 +266,7 @@ function ModalStudentCreate({
                   type="date"
                   //   defaultValue={value.dateOfBirth}
                   fancyOutlined
-                  {...register("dateOfBirth")}
+                  {...register('dateOfBirth')}
                 />
                 <p
                   data-testid="birthdate-error"
@@ -280,9 +278,9 @@ function ModalStudentCreate({
               <div className="mt-6">
                 <Input
                   label="Mã nhân viên"
-                  {...register("studentId")}
+                  {...register('studentId')}
                   fancyOutlined
-                  status={errors.studentId?.message ? "error" : ""}
+                  status={errors.studentId?.message ? 'error' : ''}
                 />
                 <p
                   data-testid="studentId-error"
@@ -295,9 +293,9 @@ function ModalStudentCreate({
               <div className="mt-6">
                 <Input
                   label="Tên đơn vị"
-                  {...register("unitId")}
+                  {...register('unitId')}
                   fancyOutlined
-                  status={errors.unitId?.message ? "error" : ""}
+                  status={errors.unitId?.message ? 'error' : ''}
                 />
                 <p
                   data-testid="unitId-error"
@@ -314,7 +312,7 @@ function ModalStudentCreate({
               </div>
             </form>
           </div>
-          
+
           <div>
             {/* <form className="mt-3" onSubmit={handleSubmit(handleDataForm)}> */}
             <h1 className="text-xl font-semibold leading-7 text-gray-800 mt-5">

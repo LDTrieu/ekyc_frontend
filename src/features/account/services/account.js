@@ -11,6 +11,7 @@ export const createAccountProfileService = (
     email,
     password,
     unitId,
+    role,
     phoneNumber,
     dateOfBirth,
 ) => {
@@ -19,6 +20,7 @@ export const createAccountProfileService = (
         email,
         password,
         unitId,
+        role,
         phoneNumber,
         dateOfBirth
     }, {

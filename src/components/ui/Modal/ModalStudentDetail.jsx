@@ -1,17 +1,17 @@
-import ModalDetail from "./ModalDetail";
-import { Button, Input } from "components/ui";
-import moment from "moment/moment";
+import ModalDetail from './ModalDetail';
+import { Button, Input } from 'components/ui';
+import moment from 'moment/moment';
 
 function ModalStudentDetail({
-  type = "confirm",
-  header = "",
-  message = "",
+  type = 'confirm',
+  header = '',
+  message = '',
   isShowing = false,
   onHide = () => {},
   onResolve = () => {},
-  titleResolve = "",
+  titleResolve = '',
   onReject = () => {},
-  titleReject = "",
+  titleReject = '',
   student,
 }) {
   const handleResolve = () => {
@@ -34,9 +34,9 @@ function ModalStudentDetail({
       <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridColumnGap: "20px",
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gridColumnGap: '20px',
           }}
         >
           <div>
@@ -124,7 +124,7 @@ function ModalStudentDetail({
                   <Input
                     type="date"
                     defaultValue={moment(student.dateOfBirth).format(
-                      "YYYY-MM-DD"
+                      'YYYY-MM-DD',
                     )}
                     fancyOutlined
                     readOnly
@@ -170,7 +170,7 @@ function ModalStudentDetail({
                   <Input
                     // label="Số điện thoại"
                     // type ="text"
-                    defaultValue={student.isBlocked ? "Hoạt động" : "Khóa"}
+                    defaultValue={student.isBlocked ? 'Hoạt động' : 'Khóa'}
                     fancyOutlined
                     readOnly
                   />
@@ -475,7 +475,6 @@ function ModalStudentDetail({
           </div>
         </div>
       </div>
-
     </ModalDetail>
   );
 }

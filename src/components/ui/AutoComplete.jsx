@@ -134,7 +134,10 @@ const AutoComplete = ({
 };
 
 AutoComplete.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   status: PropTypes.string,
@@ -144,7 +147,9 @@ AutoComplete.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   maxWidth: PropTypes.string,
-  rounded: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  rounded: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ),
   leftIcon: PropTypes.element,
   rightIcon: PropTypes.element,
   placeholder: PropTypes.string,

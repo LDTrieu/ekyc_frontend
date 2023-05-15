@@ -198,7 +198,6 @@ function UserProfile() {
                 label: 'Đổi mật khẩu',
                 data: <ChangePassword />,
               },
-     
             ]}
           />
         </div>

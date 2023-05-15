@@ -1,11 +1,6 @@
 import classNames from "classnames";
-import Home from "pages/Home";
-import Signin from "pages/Signin";
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Redirect } from 'react-router-dom';
-
 
 const AuthorizationLayout = ({ children }) => {
   const { isLogin, role } = useSelector((store) => store.auth);
