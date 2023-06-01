@@ -1,19 +1,22 @@
-import React from "react";
+import React from 'react';
 import logo from 'assets/circle_logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { MdAlternateEmail } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Input,Button } from "components/ui";
+import { MdAlternateEmail } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Input, Button } from 'components/ui';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
-import { toast } from "react-toastify";
-import moment from "moment";
+import { toast } from 'react-toastify';
+import moment from 'moment';
 
-import { accountProfileScheme } from "validations/accountProfile";
-import { addAccount, createAccountProfile } from "features/account/accountSlice";
+import { accountProfileScheme } from 'validations/accountProfile';
+import {
+  addAccount,
+  createAccountProfile,
+} from 'features/account/accountSlice';
 
-function AccountProfile({data,onDataChange }) {
+function AccountProfile({ data, onDataChange }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
@@ -25,7 +28,7 @@ function AccountProfile({data,onDataChange }) {
   } = useForm({ resolver: yupResolver(accountProfileScheme) });
   const value = watch();
   const handleDataForm = async (data, result) => {
-    console.log("data", data);
+    console.log('data', data);
     result = await dispatch(
       createAccountProfile({
         axiosPrivate,
@@ -34,79 +37,79 @@ function AccountProfile({data,onDataChange }) {
         firstName: value.firstName,
         lastName: value.lastName,
         phoneNumber: value.phoneNumber,
-        dateOfBirth: moment(value.dateOfBirth).format("YYYY-MM-DDTHH:mm:ssZ"),
+        dateOfBirth: moment(value.dateOfBirth).format('YYYY-MM-DDTHH:mm:ssZ'),
         address: value.address,
         gender: value.gender,
         unitId: value.unitId,
-      })
+      }),
     );
-    const account= {
-      accountId:value.accountId,
+    const account = {
+      accountId: value.accountId,
       email: value.email,
       firstName: value.firstName,
       lastName: value.lastName,
       phoneNumber: value.phoneNumber,
-    }
-    console.log("result: ", result);
-    if (result.type === "account/createAccountProfile/fulfilled") {
-      console.log("result.payload.code", result.payload.code);
+    };
+    console.log('result: ', result);
+    if (result.type === 'account/createAccountProfile/fulfilled') {
+      console.log('result.payload.code', result.payload.code);
       switch (result.payload.code) {
         case 0:
-          console.log("result.payload",result.payload)
-          console.log("account: ",account)
-          toast.success("Tạo tài khoản thành công!");
-        
+          console.log('result.payload', result.payload);
+          console.log('account: ', account);
+          toast.success('Tạo tài khoản thành công!');
+
           onDataChange(account);
           break;
         case 53:
-          toast.error("Service lỗi! "+result.payload.message, {
-            position: "top-right",
+          toast.error('Service lỗi! ' + result.payload.message, {
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: 'light',
           });
           break;
         default:
           if (result.payload.message.length !== 0) {
             toast.error(result.payload.message, {
-              position: "top-right",
+              position: 'top-right',
               autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "light",
+              theme: 'light',
             });
           } else {
-            toast.error("Lỗi gì đó đã xảy ra tại service!", {
-              position: "top-right",
+            toast.error('Lỗi gì đó đã xảy ra tại service!', {
+              position: 'top-right',
               autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-              theme: "light",
+              theme: 'light',
             });
           }
       }
       // Navigate if success
-      navigate("/account/create");
+      navigate('/account/create');
     } else {
-      toast.error("Lỗi gì đó đã xảy ra!", {
-        position: "top-right",
+      toast.error('Lỗi gì đó đã xảy ra!', {
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: 'light',
       });
     }
   };
@@ -123,7 +126,9 @@ function AccountProfile({data,onDataChange }) {
             </Link>
           </div> */}
           <div className="text-center">
-            <h1 className="text-h4 font-bold text-primary mt-2">Tạo tài khoản mới</h1>
+            <h1 className="text-h4 font-bold text-primary mt-2">
+              Tạo tài khoản mới
+            </h1>
             {/* <p className="text-sm text-t_gray">Chào mừng đến với FaceSense</p> */}
           </div>
         </div>
@@ -150,7 +155,10 @@ function AccountProfile({data,onDataChange }) {
               fancyOutlined
               status={errors.firstname?.message ? 'error' : ''}
             />
-            <p data-testid="firstname-error" className="text-ac_red text-sm mt-1">
+            <p
+              data-testid="firstname-error"
+              className="text-ac_red text-sm mt-1"
+            >
               {errors.firstname?.message}
             </p>
           </div>
@@ -162,11 +170,14 @@ function AccountProfile({data,onDataChange }) {
               fancyOutlined
               status={errors.lastname?.message ? 'error' : ''}
             />
-            <p data-testid="lastname-error" className="text-ac_red text-sm mt-1">
+            <p
+              data-testid="lastname-error"
+              className="text-ac_red text-sm mt-1"
+            >
               {errors.lastname?.message}
             </p>
           </div>
-          
+
           <div className="mt-6">
             <Input
               label="Tên"
@@ -174,11 +185,14 @@ function AccountProfile({data,onDataChange }) {
               fancyOutlined
               status={errors.lastname?.message ? 'error' : ''}
             />
-            <p data-testid="lastname-error" className="text-ac_red text-sm mt-1">
+            <p
+              data-testid="lastname-error"
+              className="text-ac_red text-sm mt-1"
+            >
               {errors.lastname?.message}
             </p>
           </div>
-          
+
           <div className="mt-6">
             <Input
               label="Tên"
@@ -186,7 +200,10 @@ function AccountProfile({data,onDataChange }) {
               fancyOutlined
               status={errors.lastname?.message ? 'error' : ''}
             />
-            <p data-testid="lastname-error" className="text-ac_red text-sm mt-1">
+            <p
+              data-testid="lastname-error"
+              className="text-ac_red text-sm mt-1"
+            >
               {errors.lastname?.message}
             </p>
           </div>
@@ -200,7 +217,10 @@ function AccountProfile({data,onDataChange }) {
               fancyOutlined
               status={errors.password?.message ? 'error' : ''}
             />
-            <p data-testid="password-error" className="text-ac_red text-sm mt-1">
+            <p
+              data-testid="password-error"
+              className="text-ac_red text-sm mt-1"
+            >
               {errors.password?.message}
             </p>
           </div>
@@ -214,7 +234,10 @@ function AccountProfile({data,onDataChange }) {
               fancyOutlined
               status={errors.passwordConfirmation?.message ? 'error' : ''}
             />
-            <p data-testid="retype-password-error" className="text-ac_red text-sm mt-1">
+            <p
+              data-testid="retype-password-error"
+              className="text-ac_red text-sm mt-1"
+            >
               {errors.passwordConfirmation?.message}
             </p>
           </div>
