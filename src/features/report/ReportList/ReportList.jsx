@@ -45,47 +45,20 @@ const ReportList = (props) => {
       <MuiTabs
             componentList={[
               {
-                label: 'Cài đặt tài khoản',
-                 data: <Student />,
+                label: 'Sinh viên',
+                //  data: <Student />,
               },
               {
-                label: 'Đổi mật khẩu',
-                // data: <Student />,
+                label: 'Lớp học',
+                // data: <Course />,
+              },
+              {
+                label: 'Thời gian',
+                // data: <DurationTime />,
               },
             ]}
           />
       </div>
-
-      {/* <ModalConfirm
-        header="Xác nhận"
-        message="Bạn có chắc chắn muốn khóa tài khoản này?"
-        isShowing={modalDeleteCloseVisible}
-        onHide={hideDeleteModal}
-        onResolve={BlockReport}
-        titleResolve="Xác nhận"
-        titleReject="Hủy"
-      />
-      <ModalConfirm
-        header="Xác nhận"
-        message="Bạn muốn tải danh sách này?"
-        isShowing={modalCloseVisible}
-        onHide={hideModal}
-        onResolve={DownloadList}
-        titleResolve="Xác nhận"
-        titleReject="Hủy"
-      />
-      {
-       selectedReport  && <ModalReportDetail
-        header="Detail"
-        message={selectedReport.fullName}
-         isShowing={modalDetailCloseVisible}
-        //isShowing={false}
-        onHide={hideDetailModal}
-        onResolve={DownloadList}
-        titleResolve="OK"
-        titleReject="Hủy"
-        report={selectedReport}
-      /> */}
 
     </>
     

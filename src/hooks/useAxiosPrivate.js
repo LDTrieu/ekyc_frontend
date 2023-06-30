@@ -19,6 +19,11 @@ const useAxiosPrivate = (stayOnError) => {
         if (!config.headers.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
         }
+        config.headers['Access-Control-Allow-Origin'] = '*';
+        config.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+        config.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Authorization';
+        config.headers['Access-Control-Allow-Credentials'] = 'true';
+
         return config;
       },
       (error) => {

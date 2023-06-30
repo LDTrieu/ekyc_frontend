@@ -249,13 +249,6 @@ function AccountProfile({ data, onDataChange }) {
           </div>
         </form>
 
-        {/* Direct sign in page */}
-        {/* <p className="text-sm text-center text-t_gray mt-3">
-          Đã có tài khoản?{' '}
-          <span className="text-ac_purple font-bold">
-            <Link to="/signin">Đăng nhập ngay</Link>
-          </span>
-        </p> */}
       </div>
     </div>
   );

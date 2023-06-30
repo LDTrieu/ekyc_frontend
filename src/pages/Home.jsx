@@ -74,7 +74,7 @@ const Home = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src={require('../assets/banner2.png')}
+            src={require('../assets/banner2.jpg')}
             className="aspect-[5/2] w-full object-cover rounded-lg"
             alt="Banner 1"
           />
@@ -88,20 +88,13 @@ const Home = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src={require('../assets/banner4.png')}
+            src={require('../assets/banner4.jpg')}
             className="aspect-[5/2] w-full object-cover rounded-lg"
             alt="Banner 1"
           />
         </SwiperSlide>
         <div className="h-11"></div>
       </Swiper>
-
-      {/* Popular courses */}
-      {/* <div className="mt-20">
-        {coursesPro?.length > 0 && <CourseListItem listName="Khóa học nổi bật" listCourse={courses} />}
-      </div> */}
-
-      {/* Latest exams */}
 
     </Container>
   );

@@ -36,12 +36,14 @@ function ModalStudentCreate({
     formFaceData.append('filename', selectedFaceFile);
 
     formFaceData.append('thumbnail', selectedFaceFile);
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
     const studentId = 'n18dccn241';
     const queryParam = new URLSearchParams({
       studentId: studentId,
     });
     fetch(
-      `http://localhost:8080/portal/file/update/face-video/123?${queryParam}`,
+      `${process.env.REACT_APP_BASE_URL}/portal/file/update/face-video/${request_id}?${queryParam}`,
       {
         method: 'POST',
         body: formFaceData,

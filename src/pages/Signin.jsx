@@ -4,12 +4,12 @@ import { signinScheme } from '../validations/signin';
 
 import logo from '../assets/circle_logo.png';
 // import { FcGoogle } from 'react-icons/fc';
-import { Input, Button } from '../components/ui';
+import { Input, Button } from 'components/ui';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { getUserInfo, signIn } from '../features/auth/authSlice';
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { getUserInfo, signIn } from 'features/auth/authSlice';
+import useAxiosPrivate from 'hooks/useAxiosPrivate';
 import { toast } from 'react-toastify';
 
 function Signin() {

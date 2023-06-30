@@ -1,8 +1,9 @@
-
+import { v4 as uuidv4 } from 'uuid';
 
 export const getAllAccountsService = (axiosPrivate) => {
-    console.log("service get all account")
-    return axiosPrivate.get('/portal/user/list/1') // Account
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.get(`/portal/user/list/${request_id}`) // Account
 }
 // createAccountProfileService
 export const createAccountProfileService = (
@@ -15,7 +16,10 @@ export const createAccountProfileService = (
     phoneNumber,
     dateOfBirth,
 ) => {
-    return axiosPrivate.post('/portal/user/create/1', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.post(
+        `/portal/user/create/${request_id}`, {
         fullName,
         email,
         password,
@@ -44,7 +48,9 @@ export const updateAccountEkycService = (
     nationality,
     nationalIdCardURL,
     faceImageURL) => {
-    return axiosPrivate.post('/portal/user/update-ekyc/1', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.post(`/portal/user/update-ekyc/${request_id}`, {
         accountId,
         personId,
         fullName,
@@ -65,9 +71,9 @@ export const updateAccountEkycService = (
 
 // updateAccountService
 export const updateAccountService = (axiosPrivate, accountId, isBlocked) => {
-
-    console.log("PATCH: ", accountId, isBlocked)
-    return axiosPrivate.post('/portal/user/update/123', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.post(`/portal/user/update/${request_id}`, {
         accountId,
         isBlocked,
     }, {
@@ -76,20 +82,18 @@ export const updateAccountService = (axiosPrivate, accountId, isBlocked) => {
 }
 
 export const getListAccountService = (axiosPrivate) => {
-    console.log("Get list")
-    // return axiosPrivate.get('/portal/Account/list-pdf/123', {
-    // }, {
-    //     withCredentials: false,
-    // },);
-    return axiosPrivate.get('/portal/user/download-pdf/123', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.get(`/portal/user/download-pdf/${request_id}`, {
     }, {
         withCredentials: false,
     },);
 }
 
 export const getDetailAccountService = (axiosPrivate, accountId) => {
-    console.log("service get detail account")
-    return axiosPrivate.get('/portal/user/detail/123', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.get(`/portal/user/detail/${request_id}`, {
         params: {
             accountId: accountId,
         }

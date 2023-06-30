@@ -1,6 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const getAllDevicesService = (axiosPrivate) => {
-    console.log("service get all device")
-    return axiosPrivate.get('/portal/device/list/1') // device
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.get(`/portal/device/list/${request_id}`) // device
 }
 
 // createDeviceService
@@ -11,7 +14,9 @@ export const createDeviceService = (
     password,
 
 ) => {
-    return axiosPrivate.post('/mobile/auth/signup/1', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.post(`/mobile/auth/signup//${request_id}`, {
         terminalId,
         terminalName,
         password,
@@ -22,8 +27,9 @@ export const createDeviceService = (
 }
 
 export const getDetailDeviceService = (axiosPrivate, terminalId) => {
-    console.log("service get detail device")
-    return axiosPrivate.get('/portal/device/detail/123', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.get(`/portal/device/detail/${request_id}`, {
         params: {
             terminalId: terminalId,
         }
@@ -31,9 +37,10 @@ export const getDetailDeviceService = (axiosPrivate, terminalId) => {
 }
 // updateDeviceService
 export const updateDeviceService = (axiosPrivate, terminalId, isBlocked) => {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
 
-    console.log("PATCH: ", terminalId, isBlocked)
-    return axiosPrivate.post('/portal/device/update/123', {
+    return axiosPrivate.post(`/portal/device/update/${request_id}`, {
         terminalId,
         isBlocked,
     }, {

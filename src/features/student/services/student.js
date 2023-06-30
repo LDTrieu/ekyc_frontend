@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 export const getAllStudentsService = (axiosPrivate) => {
     console.log("service get all student")
     return axiosPrivate.get('/portal/student/list/1') // student
@@ -14,7 +15,9 @@ export const createStudentProfileService = (
     unitId,
     address
 ) => {
-    return axiosPrivate.post('/portal/student/create/1', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.post(`/portal/student/create/${request_id}`, {
         studentId,
         email,
         firstName,
@@ -44,7 +47,9 @@ export const updateStudentEkycService = (
     nationality,
     nationalIdCardURL,
     faceImageURL) => {
-    return axiosPrivate.post('/portal/student/update-ekyc/1', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.post(`/portal/student/update-ekyc/${request_id}`, {
         studentId,
         personId,
         fullName,
@@ -65,9 +70,9 @@ export const updateStudentEkycService = (
 
 // updateStudentService
 export const updateStudentService = (axiosPrivate, studentId, isBlocked) => {
-
-    console.log("PATCH: ", studentId, isBlocked)
-    return axiosPrivate.post('/portal/student/update/123', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.post(`/portal/student/update/${request_id}`, {
         studentId,
         isBlocked,
     }, {
@@ -76,20 +81,18 @@ export const updateStudentService = (axiosPrivate, studentId, isBlocked) => {
 }
 
 export const getListStudentService = (axiosPrivate) => {
-    console.log("Get list")
-    // return axiosPrivate.get('/portal/student/list-pdf/123', {
-    // }, {
-    //     withCredentials: false,
-    // },);
-    return axiosPrivate.get('/portal/student/list-pdf/123', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.get(`/portal/student/list-pdf/${request_id}`, {
     }, {
         withCredentials: false,
     },);
 }
 
 export const getDetailStudentService = (axiosPrivate, studentId) => {
-    console.log("service get detail student")
-    return axiosPrivate.get('/portal/student/detail/123', {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    return axiosPrivate.get(`/portal/student/detail/${request_id}`, {
         params: {
             studentId: studentId,
         }

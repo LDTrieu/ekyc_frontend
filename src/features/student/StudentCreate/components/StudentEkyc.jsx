@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../../../../components/ui";
 import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
-
 import { toast } from "react-toastify";
 import { studentEkycScheme } from "../../../../validations/studentEkyc";
 import moment from "moment/moment";
@@ -63,13 +62,17 @@ function StudentEkyc(data) {
   };
   
   const handleSubmissionCCCD = () => {
+    
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
+    
     const formCCCDData = new FormData();
     formCCCDData.append("filename", selectedCCCDFile);
     const studentId = 'n18dccn232';
     const queryParam = new URLSearchParams({
       studentId: studentId
     });
-    fetch(`http://localhost:8080/portal/file/upload/national-id-card/123?${queryParam}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/portal/file/upload/national-id-card/${request_id}?${queryParam}`, {
       method: "POST",
       body: formCCCDData,
     })
@@ -128,15 +131,16 @@ function StudentEkyc(data) {
   };
 
   const handleSubmissionFaceImage = () => {
+    const unique_id = uuidv4();
+    const request_id = unique_id.slice(0, 8)
     const formFaceData = new FormData();
     formFaceData.append("filename", selectedFaceFile);
-
     formFaceData.append("thumbnail", thumbnailFile);
     const studentId = 'n18dccn241';
     const queryParam = new URLSearchParams({
       studentId: studentId
     });
-    fetch(`http://localhost:8080/portal/file/update/face-video/123?${queryParam}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/portal/file/update/face-video/${request_id}?${queryParam}`, {
       method: "POST",
       body: formFaceData,
     })

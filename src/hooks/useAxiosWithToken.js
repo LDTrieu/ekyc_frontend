@@ -12,6 +12,20 @@ const useAxiosWithToken = () => {
         if (!config.headers.Authorization) {
           config.headers.Authorization = 'Bearer ' + accessToken;
         }
+        config.headers['Access-Control-Allow-Origin'] = '*';
+        config.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+        config.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Authorization';
+        config.headers['Access-Control-Allow-Credentials'] = 'true';
+        config.headers['Access-Control-Allow-Credentials'] = 'true';
+        config.headers['Access-Control-Allow-Credentials'] = 'true';
+        config.headers['Access-Control-Allow-Credentials'] = 'true';
+        config.headers['Access-Control-Allow-Credentials'] = 'true';
+
+        // Sec-Fetch-Site:
+        // Sec-Fetch-Dest:
+        // Accept-Encoding: gzip, deflate, br
+        // Accept-Language:   en-US,en;q=0.9
+         // Host: localhost:8080
         return config;
       },
       (error) => error,

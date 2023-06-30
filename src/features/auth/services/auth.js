@@ -14,7 +14,6 @@ export const signUpService = (email, firstname, lastname, password, passwordConf
 export const signInService = (email, password) => {
   const unique_id = uuidv4();
   const request_id = unique_id.slice(0, 8)
-  console.log(request_id)
   return base.post(
     `/login/auth/${request_id}`,
     {

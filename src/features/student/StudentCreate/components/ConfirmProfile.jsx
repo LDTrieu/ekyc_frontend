@@ -68,7 +68,7 @@ function ConfirmProfile(data) {
     const formCCCDData = new FormData();
 
     formCCCDData.append("filename", selectedCCCDFile);
-    fetch("http://localhost:8080/portal/file/upload/national-id-card/cccd123", {
+    fetch(`${process.env.REACT_APP_BASE_URL}/portal/file/upload/national-id-card/cccd123`, {
       method: "POST",
       body: formCCCDData,
     })
@@ -118,7 +118,7 @@ function ConfirmProfile(data) {
     const formFaceData = new FormData();
 
     formFaceData.append("filename", selectedFaceFile);
-    fetch("http://localhost:8080/portal/file/upload/face-reg/face456", {
+    fetch(`${process.env.REACT_APP_BASE_URL}/portal/file/upload/face-reg/face456`, {
       method: "POST",
       body: formFaceData,
     })

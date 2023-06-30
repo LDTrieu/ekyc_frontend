@@ -2,7 +2,7 @@
 import config from '../config';
 
 // Layouts
-import { AuthLayout, NoRecommendLayout , RequireLoginLayout, AuthorizationLayout, AuthNoRecommendLayout} from '../layouts';
+import { AuthLayout, NoRecommendLayout, RequireLoginLayout, AuthorizationLayout, AuthNoRecommendLayout } from '../layouts';
 
 // Page
 import Home from 'pages/Home';
@@ -21,13 +21,13 @@ const publicRouters = [
     {
         path: config.routes.forbidden, component: Forbidden,
     },
-    
+
     // Sigin
     {
         path: config.routes.signin, component: Signin,
         layout: AuthLayout
     },
-    
+
     // Student
     {
         path: config.routes.student, component: StudentList,
@@ -69,7 +69,7 @@ const publicRouters = [
         path: config.routes.report, component: ReportList,
         layout: NoRecommendLayout,
     },
-    
+
 ];
 
 // Private routes

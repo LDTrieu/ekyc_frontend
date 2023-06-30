@@ -13,7 +13,7 @@ function AccountCreate() {
     phoneNumber: "",
   })
   return (
-    // <div className="w-full bg-white p-10">
+
        <AccountProfile />
 
   );
